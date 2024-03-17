@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-fluid {
+    position: relative; /* Ensure relative positioning for the container */
+    height: 100vh; /* Set container height to viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-image {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 1;
+}
+
+
+
+.login-form {
+    border-radius: 20px;
+    background-color: white;
+    padding: 50px;
+    width: 400px;
+}
+
+.btn-primary {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    /* background: linear-gradient(90deg, rgb(218, 227, 217) 0%, rgb(239, 141, 94) 35%, rgb(77, 120, 121) 100%); */
+    color: whitesmoke;
+    background-color: rgb(77, 120, 121);
+    font-weight: 900;
+}
+
+.form-control {
+    color: rgba(0, 0, 0, .87);
+    border-bottom-color: rgba(0, 0, 0, .42);
+    box-shadow: none !important;
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 4px 4px 0 0;
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 900;
+}
+
+.notification-popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+}
