@@ -52,7 +52,6 @@
                     </button>
                 </form>
             </li>
-        
         </ul>
 
         <!-- Administrator Navigation -->

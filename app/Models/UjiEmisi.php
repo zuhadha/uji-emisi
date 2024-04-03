@@ -11,7 +11,7 @@ class UjiEmisi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'odometer', 'kendaraan_id', 'user_id', 'co', 'hc', 'opasitas', 'co2', 'co_koreksi', 'o2', 'putaran', 'tanggal_uji', 'temperatur', 'lambda', 'certificate'
+        'odometer', 'kendaraan_id', 'user_id', 'co', 'hc', 'opasitas', 'co2', 'co_koreksi', 'o2', 'putaran', 'tanggal_uji', 'temperatur', 'lambda', 'no_sertifikat'
     ];
 
     // menginput tanggal uji secara otomatis dengan tanggal saat ini.

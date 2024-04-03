@@ -188,3 +188,35 @@ a.sidebar-link, .logout-button {
 .custom-placeholder::placeholder {
     font-size: 0.8em; /* Adjust the font size as needed */
 }
+
+.custom-placeholder2::placeholder {
+    /* font-size: 0.8em; */
+    color: #B0B6BC; /* Adjust the font size as needed */
+}
+
+
+.rounded-left-bottom {
+    border-radius: 8px 0 0 8px;
+}
+
+.rounded-right-bottom {
+    border-radius: 0 8px 8px 0;
+}
+
+
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: whitesmoke;
+    background-color:#457BC3;
+    border-color: #1C5EB6;
+}
+a.page-link:hover{
+    z-index: 3;
+    color: whitesmoke;
+    background-color:#95B4DD;
+}
+
+.page-link {
+    color: #457BC3;
+}

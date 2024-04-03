@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('admin'),
             'bengkel_name' => 'Administrator',
+            'kepala_bengkel' => 'Saka Media Satwika',
             'jalan' => 'Sauyunan',
             'kab_kota' => 'Bandung',
             'kecamatan' => 'Panyileukan',

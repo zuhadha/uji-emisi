@@ -10,7 +10,7 @@ class Kendaraan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nopol', 'ujiemisi_id', 'user_id', 'merk', 'tipe', 'cc', 'tahun', 'tanggal_uji', 'no_rangka',  'no_mesin', 'bahan_bakar'
+        'nopol', 'ujiemisi_id', 'user_id', 'merk', 'tipe', 'cc', 'tahun', 'tanggal_uji', 'no_rangka',  'no_mesin', 'bahan_bakar', 'kendaraan_kategori'
     ];
 
     public function user() {

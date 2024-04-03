@@ -32,6 +32,7 @@ class KendaraanFactory extends Factory
             'tipe' => $model,
             'cc' => $this->faker->regexify('^1[1256][05]$'),
             'tahun' => $this->faker->numberBetween(2009, 2023),
+            'kendaraan_kategori' => $this->faker->randomElement([1,2,3,4]),
             'no_rangka' => $this->faker->shuffle('1234567890129870'),
             'no_mesin' => $this->faker->shuffle('1234567890129870'),
             'bahan_bakar' => $this->faker->randomElement(['Solar', 'Bensin', 'Gas']),

@@ -41,7 +41,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">No</th>
+                    <th class="text-center" scope="col">No</th>
                     <th scope="col">Nomor Polisi</th>
                     <th scope="col">Merk</th>
                     <th scope="col">Tipe</th>
@@ -57,9 +57,7 @@
                 @foreach($kendaraans as $k)
                     
                     <tr>
-                        {{-- <td>{{ $loop->iteration }}</td>--}}
-                        <td>{{ ($kendaraans->currentPage() - 1) * $kendaraans->perPage() + $loop->iteration }}</td>
-
+                        <td class="text-center">{{ ($kendaraans->currentPage() - 1) * $kendaraans->perPage() + $loop->iteration }}</td>
                         <td>{{ $k["nopol"] }}</td>
                         <td>{{ $k["merk"] }}</td>
                         <td>{{ $k["tipe"] }}</td>
@@ -70,7 +68,8 @@
                         @endcan
                         <td>
                             <a href="/dashboard/kendaraan/{{ $k->id }}" class="badge bg-secondary action-btn"><i class="fa fa-file-lines"></i></a>
-                            <a href="/dashboard/kendaraan/{{ $k->id }}/edit" class="badge bg-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="/dashboard/kendaraan/{{ $k->id }}/edit" class="badge bg-primary action-btn"><i class="fa fa-pencil"></i></a>
+                            <a href="/dashboard/ujiemisi/insert/create/{{ $k->id }}" class="badge bg-success action-btn"><i class="fa fa-wrench"></i></a>
                             <form action="/dashboard/kendaraan/{{ $k->id }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf
@@ -85,9 +84,8 @@
     </div>
     <div class=col-lg-11">
         <div class="row">
-
             <div class="col-lg-5">
-    
+                <p class="text-secondary ms-3"><strong><small>Total: </strong><span>{{ $totalRecords }}</span></small></p>
             </div>
             <div class="col-lg-6 d-flex justify-content-end">
                 {{ $kendaraans->links() }}

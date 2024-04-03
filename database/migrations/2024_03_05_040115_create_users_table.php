@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('bengkel_name');
+            $table->string('kepala_bengkel');
             $table->string('jalan')->nullable();
             $table->string('kab_kota')->nullable();
             $table->string('kecamatan')->nullable();
             $table->string('kelurahan')->nullable();
             $table->boolean('is_admin');
+            $table->string('user_kategori');
             $table->rememberToken();
             $table->timestamps();
         });

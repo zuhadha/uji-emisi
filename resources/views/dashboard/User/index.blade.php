@@ -18,7 +18,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">No</th>
+                    <th class="text-center" scope="col">No</th>
                     <th scope="col">Username</th>
                     <th scope="col">Nama Bengkel</th>
                     <th scope="col">Alamat</th>

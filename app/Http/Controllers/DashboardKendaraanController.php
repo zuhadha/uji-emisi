@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
+use App\Models\UjiEmisi;
 use Illuminate\Http\Request;
 
 class DashboardKendaraanController extends Controller
@@ -10,7 +11,7 @@ class DashboardKendaraanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
+    public function index(Request $request, UjiEmisi $ujiemisi) {
 
         $keyword=$request->keyword;
 
@@ -25,26 +26,30 @@ class DashboardKendaraanController extends Controller
                 ->paginate(11);
             $kendaraans->appends($request->all());
         } else {
-            // If the logged-in user is not an admin, filter the rows based on the user's bengkel_id
-            $kendaraans = Kendaraan::where('nopol', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('tahun','LIKE', '%'.$keyword.'%')
-                ->orWhere('merk','LIKE', '%'.$keyword.'%')
-                ->orWhere('tipe','LIKE', '%'.$keyword.'%')
-                ->orWhere('bahan_bakar','LIKE', '%'.$keyword.'%')    
-                ->whereHas('user', function ($query) {
-                    $query->where('id', auth()->user()->id);
-                })
-                ->paginate(11);
-            // $kendaraans = Kendaraan::whereHas('user', function ($query) {
-            //     $query->where('id', auth()->user()->id);
-            // })->paginate(10);
+            // If the logged-in user is not an admin, filter the rows based on the user's id
+            $kendaraans = Kendaraan::where('user_id', auth()->user()->id)
+            ->where(function($query) use ($keyword) {
+                $query->where('nopol', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('tahun','LIKE', '%'.$keyword.'%')
+                    ->orWhere('merk','LIKE', '%'.$keyword.'%')
+                    ->orWhere('tipe','LIKE', '%'.$keyword.'%')
+                    ->orWhere('bahan_bakar','LIKE', '%'.$keyword.'%');
+            })
+            ->paginate(11);
+            $kendaraans->appends($request->all());
+        
         }
+
+        
+        $totalRecords = $kendaraans->total();
 
         return view('dashboard.kendaraan.index', [
             "title" => "List Kendaraan",
             "kendaraans" => $kendaraans, 
             "bengkel" => auth()->user()->bengkel_name,
-            "keyword" => $keyword
+            "keyword" => $keyword, 
+            "ujiemisi" => $ujiemisi,
+            "totalRecords" => $totalRecords
         ]);
     }
 
@@ -78,6 +83,7 @@ class DashboardKendaraanController extends Controller
             'cc' => 'required|gt:100',
             'no_rangka' => '',
             'no_mesin' => '',
+            'kendaraan_kategori' => '',
             'bahan_bakar' => '',
         ]);
 
@@ -109,7 +115,6 @@ class DashboardKendaraanController extends Controller
      */
     public function edit(Kendaraan $kendaraan)
     {
-
         // dd($kendaraan);
         return view('/dashboard/kendaraan/edit-kendaraan', [
             'kendaraan' => $kendaraan,
@@ -122,6 +127,9 @@ class DashboardKendaraanController extends Controller
      */
     public function update(Request $request, Kendaraan $kendaraan)
     {
+
+        // dd($request);
+
         $validatedData = $request->validate([
             'nopol' => 'required', 
             'merk' => 'required',
@@ -130,14 +138,13 @@ class DashboardKendaraanController extends Controller
             'cc' => 'required|gt:100',
             'no_rangka' => '',
             'no_mesin' => '',
+            'kendaraan_kategori' => '',
             'bahan_bakar' => '',
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
         
         Kendaraan::where('id', $kendaraan->id)->update($validatedData);
-        // Simpan kendaraan_id dalam session
-        session()->put('idKendaraan', $kendaraan->id);
 
         return redirect('/dashboard/kendaraan')->with('success', 'Kendaraan berhasil diedit');
     }
@@ -147,8 +154,11 @@ class DashboardKendaraanController extends Controller
      */
     public function destroy(Kendaraan $kendaraan)
     {
-        Kendaraan::destroy($kendaraan->id);
 
+        // hapus semua hasil uji emisi dari kendaraan tersebut
+        UjiEmisi::where('kendaraan_id', $kendaraan->id)->delete();
+
+        Kendaraan::destroy($kendaraan->id);
         return redirect('/dashboard/kendaraan')->with('success', 'Kendaraan berhasil dihapus');
     }
 }

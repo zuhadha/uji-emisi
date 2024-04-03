@@ -7,26 +7,25 @@
 
     <div class="col-lg-11">
 
-        <form method="post" action="/dashboard/kendaraan/{{ $kendaraan->id }}" id="formKendaraan">
+        <form method="post" action="/dashboard/ujiemisi/{{ $ujiemisi->id }}" id="formKendaraan">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3 row">
                         <label for="nopol" class="col-sm-4 col-form-label">No Polisi<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nopol" name="nopol" required value="{{ old('nopol', $ujiemisi->kendaraan->nopol) }}">
+                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nopol" name="nopol" required disabled value="{{ old('nopol', $ujiemisi->kendaraan->nopol) }}">
                             @error('nopol')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
-
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="merk" class="col-sm-4 col-form-label">Merk<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" required value="{{ old('merk', $ujiemisi->kendaraan->merk) }}">
+                            <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" required disabled value="{{ old('merk', $ujiemisi->kendaraan->merk) }}">
                             @error('merk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -38,7 +37,7 @@
                     <div class="mb-3 row">
                       <label for="tipe" class="col-sm-4 col-form-label">Tipe<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
-                          <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" required value="{{ old('tipe', $ujiemisi->kendaraan->tipe) }}">
+                          <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" required disabled value="{{ old('tipe', $ujiemisi->kendaraan->tipe) }}">
                           @error('tipe')
                               <div class="invalid-feedback">
                                   {{ $message }}
@@ -50,7 +49,7 @@
                     <div class="mb-3 row">
                       <label for="tahun" class="col-sm-4 col-form-label">Tahun<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
-                          <input type="number" class="form-control @error('tahun') is-invalid @enderror" id="tahun" name="tahun" required value="{{ old('tahun', $ujiemisi->kendaraan->tahun) }}">
+                          <input type="number" class="form-control @error('tahun') is-invalid @enderror" id="tahun" name="tahun" required disabled value="{{ old('tahun', $ujiemisi->kendaraan->tahun) }}">
                           @error('tahun')
                               <div class="invalid-feedback">
                                   {{ $message }}
@@ -67,7 +66,7 @@
                         <label for="cc" class="col-sm-4 col-form-label">CC<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
 
-                            <input type="number" class="form-control @error('cc') is-invalid @enderror" id="cc" name="cc" required value="{{ old('cc', $ujiemisi->kendaraan->cc) }}">
+                            <input type="number" class="form-control @error('cc') is-invalid @enderror" id="cc" name="cc" required disabled value="{{ old('cc', $ujiemisi->kendaraan->cc) }}">
                             @error('cc')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -79,7 +78,7 @@
                     <div class="mb-3 row">
                         <label for="no_rangka" class="col-sm-4 col-form-label">No Rangka (VIN)</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" id="no_rangka" name="no_rangka" required value="{{ old('no_rangka', $ujiemisi->kendaraan->no_rangka) }}">
+                            <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" id="no_rangka" name="no_rangka" required disabled value="{{ old('no_rangka', $ujiemisi->kendaraan->no_rangka) }}">
                             @error('no_rangka')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -94,7 +93,7 @@
                     <div class="mb-3 row">
                         <label for="no_mesin" class="col-sm-4 col-form-label" focus>No Mesin</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" id="no_mesin" name="no_mesin" required value="{{ old('no_mesin', $ujiemisi->kendaraan->no_mesin) }}">
+                            <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" id="no_mesin" name="no_mesin" required disabled value="{{ old('no_mesin', $ujiemisi->kendaraan->no_mesin) }}">
                             @error('no_mesin')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -104,24 +103,43 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Kategori<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" disabled name="kendaraan_kategori">
+                                @php
+                                    $counter = 1;
+                                @endphp
+                                @foreach(['Angkutan Orang', 'Angkutan Barang', 'Angkutan Gandengan', 'Sepeda Motor 2 Tak', 'Sepeda Motor 4 Tak'] as $kendaraan_kategori)
+                                    @if (old('kendaraan_kategori') == $counter || (isset($kendaraan) && $ujiemisi->kendaraan->kendaraan_kategori == $kendaraan_kategori))
+                                        <option selected value="{{ $counter }}">{{ $kendaraan_kategori }}</option>    
+                                    @else
+                                        <option value="{{ $counter }}">{{ $kendaraan_kategori }}</option>
+                                    @endif
+                                    @php
+                                        $counter++;
+                                    @endphp
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="mb-3 row">
                         <div class="col-sm-4">
                             <label for="bensin" class="form-label">Bahan Bakar<span class="text-danger">*</span></label>
                         </div>
                         <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bahan_bakar" id="bensin" value="bensin" checked>
-                                <label class="form-check-label" for="bensin">Bensin</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bahan_bakar" id="solar" value="solar">
-                                <label class="form-check-label" for="solar">Solar</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bahan_bakar" id="gas" value="gas">
-                                <label class="form-check-label" for="gas">Gas</label>
-                            </div>
+                            @foreach(['Bensin', 'Solar', 'Gas'] as $bahan_bakar)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input @error('bahan_bakar') is-invalid @enderror" type="radio" disabled name="bahan_bakar" id="{{ $bahan_bakar }}" value="{{ $bahan_bakar }}" {{ old('bahan_bakar', $ujiemisi->kendaraan->bahan_bakar ?? '') == $bahan_bakar ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="{{ $bahan_bakar }}">{{ $bahan_bakar }}</label>
+                                </div>
+                            @endforeach
+
+
                         </div>                        
                         @error('bahan_bakar')
                             <div class="invalid-feedback">
@@ -269,11 +287,11 @@
                     <!-- Add other fields for the right column -->
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="submitBothForms">Update Hasil</button>
+            <button type="submit" class="btn btn-primary" id="submitBothForms">Update Hasil Uji</button>
         </form>
     </div>
 
-    <script>
+    {{-- <script>
         // Get the forms and button by ID
         const formKendaraan = $('#formKendaraan');
         const formUjiEmisi = $('#formUjiEmisi');
@@ -321,7 +339,7 @@
             }
           });
         });
-      </script>
+    </script> --}}
 
 
 @endsection

@@ -19,6 +19,15 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="kepala_bengkel" class="form-label">Nama Kepala Bengkel<span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('kepala_bengkel') is-invalid @enderror" id="kepala_bengkel" name="kepala_bengkel" required value="{{ old('kepala_bengkel', $user->kepala_bengkel) }}">
+                @error('kepala_bengkel')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="username" class="form-label" focus>Username<span class="text-danger">*</span></label>
                 <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" required value="{{ old('username', $user->username) }}">
                 @error('username')

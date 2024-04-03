@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tipe');
             $table->integer('cc');
             $table->integer('tahun');
+            $table->integer('kendaraan_kategori');
             $table->string('no_rangka')->nullable();
             $table->string('no_mesin')->nullable();
             $table->string('bahan_bakar');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->integer('odometer');
             $table->float('co');
-            $table->float('hc');
+            $table->integer('hc');
             $table->float('opasitas')->nullable();
             $table->float('co2')->nullable();
             $table->float('co_koreksi')->nullable();
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->float('putaran')->nullable();
             $table->float('temperatur')->nullable();
             $table->float('lambda')->nullable();
+            $table->string('no_sertifikat')->nullable();
             $table->timestamp('tanggal_uji')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });

@@ -54,6 +54,7 @@ class UjiEmisiFactory extends Factory
             'temperatur' => $this->faker->randomFloat(2, 1, 10),
             'lambda' => $this->faker->randomFloat(2, 1, 10),
             'tanggal_uji' => $this->faker->dateTimeThisDecade()->format('Y/m/d'), // Format tanggal sesuai yang diinginkan
+            'no_sertifikat' => $this->faker->regexify('^[A-Z]{1,2}\d{6}'),
         ];
     }
 

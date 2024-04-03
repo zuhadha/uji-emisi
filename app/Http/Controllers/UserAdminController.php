@@ -37,6 +37,7 @@ class UserAdminController extends Controller
         $validatedData = $request->validate([
             'bengkel_name' => 'required',
             'username' => 'required', 
+            'kepala_bengkel' => 'required', 
             'password' => 'required',
             'jalan' => '',
             'kab_kota' => '',
@@ -98,6 +99,7 @@ class UserAdminController extends Controller
     $validatedData = $request->validate([
         'bengkel_name' => 'required',
         'username' => 'required',
+        'kepala_bengkel' => 'required', 
         'password' => '',
         'jalan' => '',
         'kab_kota' => '',

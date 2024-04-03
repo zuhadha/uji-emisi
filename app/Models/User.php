@@ -21,11 +21,13 @@ class User extends Authenticatable
         'username',
         'password',
         'bengkel_name',
+        'kepala_bengkel',
         'jalan',
         'kab_kota',
         'kecamatan',
         'kelurahan',
         'is_admin',
+        'user_kategori'
     ];
 
     /**
@@ -50,6 +52,7 @@ class User extends Authenticatable
     
     protected $attributes = [
         'is_admin' => false,
+        'user_kategori' => 'bengkel',
     ];
 
     // public function bengkel() {

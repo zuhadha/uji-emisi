@@ -29,10 +29,12 @@ class UserFactory extends Factory
             'username' => $username,
             'password' => Hash::make('password'),
             'bengkel_name' => $bengkel_name,
+            'kepala_bengkel' => $name,
             'jalan' => $this->faker->sentence(2),
             'kab_kota' => $this->faker->city(),
             'kecamatan' => $this->faker->word(),
             'kelurahan' => $this->faker->word(),
+            // 'user_kategori' => $this->faker->word(),
             'remember_token' => Str::random(10),
         ];
     }
