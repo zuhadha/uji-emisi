@@ -328,9 +328,8 @@ class KendaraanUjiEmisiController extends Controller
 
         $kepala_bengkel_baru_formatted = str_pad($kepala_bengkel, 16, ' ', STR_PAD_BOTH);
 
-
-
-        $pdf = new FPDF('L','mm',array(203.2,78)); //tambah 2 karena kepotong
+        // $pdf = new FPDF('L','mm',array(203.2,78)); //tambah 2 karena kepotong // original
+        $pdf = new FPDF('P','mm',array(203.2,203.2)); //tambah 2 karena kepotong // coba buat printer
         $pdf->AddPage();
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
@@ -354,11 +353,6 @@ class KendaraanUjiEmisiController extends Controller
         // $pdf->Output('F', public_path('pdf/' . $fileName));
 
         $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '.pdf';
-
-
-
-
-
         exit;
     }
 }

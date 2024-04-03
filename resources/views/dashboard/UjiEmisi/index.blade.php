@@ -26,7 +26,10 @@
             
         </div>
         <div class="col-lg-4  d-flex justify-content-end">
-            <button  type="submit" class="btn btn-primary mb-3">Export</button>
+            <form action="{{ route('export') }}" method="GET">
+                @csrf
+                <button type="submit" class="btn btn-primary mb-3">Export</button>
+            </form>            
         </div>
         <form class="col-lg-3 d-flex justify-content-end" method="GET" action="/dashboard/ujiemisi">
             <div class="row">
