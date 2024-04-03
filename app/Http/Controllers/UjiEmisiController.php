@@ -28,7 +28,7 @@ class UjiEmisiController extends Controller
                 ->orWhere('kendaraans.merk','LIKE', '%'.$keyword.'%')
                 ->orWhere('kendaraans.tipe','LIKE', '%'.$keyword.'%')
                 ->orWhere('kendaraans.bahan_bakar','LIKE', '%'.$keyword.'%')
-                ->paginate(11);
+                ->paginate(10);
             $ujiemisis->appends($request->all());
         } else {
             $ujiemisis = UjiEmisi::with('kendaraan')
@@ -42,7 +42,7 @@ class UjiEmisiController extends Controller
                         ->orWhere('kendaraans.tipe','LIKE', '%'.$keyword.'%')
                         ->orWhere('kendaraans.bahan_bakar','LIKE', '%'.$keyword.'%');
                 })
-                ->paginate(11);
+                ->paginate(10);
             $ujiemisis->appends($request->all());
         }
 

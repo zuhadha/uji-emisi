@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardUjiEmisiController;
 use App\Http\Controllers\KendaraanUjiEmisiController;
 use App\Http\Controllers\UjiEmisiController;
 use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PdfController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -81,3 +82,5 @@ Route::post('/dashboard/ujiemisi/input-sertif/input-nomor', [UjiEmisiController:
 
 // test pdf
 Route::get('/dashboard/cetak', [KendaraanUjiEmisiController::class, 'cetakPdf']);
+
+Route::get('/export', [ExportController::class, 'export'])->name('export');
