@@ -5,8 +5,15 @@
                 <img src="{{ asset('Lambang_Kota_Bandung.png') }}" alt="Logo" class="logo">
                 UJI EMISI
             </a>
-            {{-- <a href="/">UJI EMISI</a> --}}
         </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a href="/dashboard" class="sidebar-link logout-button">
+                    <i class="fa fa-gauge pe-2"></i>
+                    Dashboard
+                </a>
+            </li>
+        </ul>
         <!-- Sidebar Navigation -->
         <h6 class= "sidebar-heading d-flex justify-content-between align-item-center px-3 mb-1 text-muted menu-title">
             <span>Menu</span>
@@ -56,16 +63,17 @@
 
         <!-- Administrator Navigation -->
         @can('admin')
-        <h6 class= "sidebar-heading d-flex justify-content-between align-item-center px-3 mt-4 mb-1 text-muted menu-title">
-            <span>Administrator</span>
-        </h6>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
+            <h6
+                class= "sidebar-heading d-flex justify-content-between align-item-center px-3 mt-4 mb-1 text-muted menu-title">
+                <span>Administrator</span>
+            </h6>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
                 <li class="sidebar-item">
                     <a href="/dashboard/user" class="sidebar-link"><i class="fa fa-users pe-2"></i> Pengguna</a>
                 </li>
-            </li>
-        </ul>
+                </li>
+            </ul>
         @endcan
     </div>
 </aside>
