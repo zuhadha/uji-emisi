@@ -4,17 +4,17 @@
 - Tampilan Edit Hasil Uji + Edit Kendaraan ✅
 - Insert Hasil Uji + Tambah Kendaraan ✅
 - Tampilan List Hasil Uji Emisi ✅
-- Data Validation Hasil Uji
-- Pengecekan Lulus/Tidak
-- Input Sertifikat Lulus Uji Emisi
-- Print Sertifikat LUlus Uji ke PDF
+- Data Validation Hasil Uji ✅
+- Pengecekan Lulus/Tidak ✅
+- Input Sertifikat Lulus Uji Emisi ✅
+- Print Sertifikat LUlus Uji ke PDF ✅
 ### Modul Kendaraan:
 - Tampilan Tambah Kendaraan ✅
 - Tampilan List Kendaraan ✅
 - Edit Kendaraan ✅
 - Lihat Kendaraan ✅
-- Delet Kendaraan (baru berhasil delete kendaraan saja, seharusnya record uji emisi yang menempel dengan kendaraan tsb ikut terhapus)
-- Insert Uji Emisi melalui Kendaraan
+- Delet Kendaraan (baru berhasil delete kendaraan saja, seharusnya record uji emisi yang menempel dengan kendaraan tsb ikut terhapus) ✅
+- Insert Uji Emisi melalui Kendaraan ✅
 ### Modul User:
 - Tambah User ✅
 - Edit User ✅
