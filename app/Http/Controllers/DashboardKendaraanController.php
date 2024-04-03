@@ -37,17 +37,17 @@ class DashboardKendaraanController extends Controller
             })
             ->paginate(11);
             $kendaraans->appends($request->all());
-        
+
         }
 
-        
+
         $totalRecords = $kendaraans->total();
 
-        return view('dashboard.kendaraan.index', [
+        return view('dashboard.Kendaraan.index', [
             "title" => "List Kendaraan",
-            "kendaraans" => $kendaraans, 
+            "kendaraans" => $kendaraans,
             "bengkel" => auth()->user()->bengkel_name,
-            "keyword" => $keyword, 
+            "keyword" => $keyword,
             "ujiemisi" => $ujiemisi,
             "totalRecords" => $totalRecords
         ]);
@@ -56,14 +56,14 @@ class DashboardKendaraanController extends Controller
 
     /**
      * Show the form for creating a new resource.
-    //  * @param \Illuminate\Http\Request
-    //  * @return \Illuminate\Http\Response
+      * @param \Illuminate\Http\Request
+      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('dashboard.kendaraan.form-kendaraan', [
+        return view('dashboard.Kendaraan.form-kendaraan', [
             "bengkel_name" => auth()->user()->bengkel_name,
-        ]); 
+        ]);
     }
 
     /**
@@ -76,7 +76,7 @@ class DashboardKendaraanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nopol' => 'required', 
+            'nopol' => 'required',
             'merk' => 'required',
             'tipe' => 'required',
             'tahun' => 'required|gt:1900',
@@ -99,13 +99,13 @@ class DashboardKendaraanController extends Controller
 
     /**
      * Display the specified resource.
-    //  * @param \App\Models\Kendaraan
-    //  * @return \Illuminate\Http\Response
+      * @param \App\Models\Kendaraan
+      * @return \Illuminate\Http\Response
      */
 
     public function show(Kendaraan $kendaraan)
     {
-        return view('dashboard.kendaraan.show', [
+        return view('dashboard.Kendaraan.show', [
             'kendaraan' => $kendaraan
         ]);
     }
@@ -116,10 +116,10 @@ class DashboardKendaraanController extends Controller
     public function edit(Kendaraan $kendaraan)
     {
         // dd($kendaraan);
-        return view('/dashboard/kendaraan/edit-kendaraan', [
+        return view('dashboard.Kendaraan.edit-kendaraan', [
             'kendaraan' => $kendaraan,
             "bengkel_name" => auth()->user()->bengkel_name,
-        ]); 
+        ]);
     }
 
     /**
@@ -131,7 +131,7 @@ class DashboardKendaraanController extends Controller
         // dd($request);
 
         $validatedData = $request->validate([
-            'nopol' => 'required', 
+            'nopol' => 'required',
             'merk' => 'required',
             'tipe' => 'required',
             'tahun' => 'required|gt:1900',
@@ -143,7 +143,7 @@ class DashboardKendaraanController extends Controller
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
-        
+
         Kendaraan::where('id', $kendaraan->id)->update($validatedData);
 
         return redirect('/dashboard/kendaraan')->with('success', 'Kendaraan berhasil diedit');

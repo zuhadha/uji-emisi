@@ -19,7 +19,7 @@ class UjiEmisiController extends Controller
     public function index(Request $request) {
         $keyword = $request->keyword;
         if (auth()->user()->is_admin) {
-            
+
             // Query uji emisi dengan join ke tabel kendaraan
             $ujiemisis = UjiEmisi::with('kendaraan')
                 ->join('kendaraans', 'uji_emisis.kendaraan_id', '=', 'kendaraans.id')
@@ -48,7 +48,7 @@ class UjiEmisiController extends Controller
 
         $totalRecords = $ujiemisis->total();
 
-        return view('/dashboard/ujiemisi/index', [
+        return view('dashboard.UjiEmisi.index', [
             "title" => "List Kendaraan",
             // "kendaraans" => $kendaraans, // Gunakan kendaraans di view jika diperlukan
             "ujiemisis" => $ujiemisis,
@@ -70,12 +70,12 @@ class UjiEmisiController extends Controller
     public function showInputSertifikat(UjiEmisi $ujiemisi, $ujiemisi_id)
     {
         $ujiemisiLulus = UjiEmisi::findOrFail($ujiemisi_id);
-        return view('dashboard.ujiemisi.input-sertif', [
+        return view('dashboard.UjiEmisi.input-sertif', [
             "bengkel_name" => auth()->user()->bengkel_name,
             "ujiemisi" => $ujiemisiLulus
         ]);
     }
-    
+
     public function inputSertifikat(Request $request, UjiEmisi $ujiemisi) // ini gak kepake.
     {
         $validatedData = $request->validate([
@@ -85,7 +85,7 @@ class UjiEmisiController extends Controller
         dd($request);
 
         UjiEmisi::where('id', $ujiemisi->id)->update($validatedData);
-        
+
         $ujiemisi->update($validatedData);
 
         return redirect('/dashboard/ujiemisi')->with('success', 'Uji Emisi berhasil ditambahkan, dan kendaraan lulus uji emisi');
@@ -100,10 +100,10 @@ class UjiEmisiController extends Controller
 
         $kendaraan = "";
         // dd($kendaraan);
-        return view('dashboard/ujiemisi/insert-uji', [
+        return view('dashboard.UjiEmisi.insert-uji', [
             "bengkel_name" => auth()->user()->bengkel_name,
             "kendaraan" => $kendaraan,
-        ]); 
+        ]);
     }
 
     /**
@@ -113,7 +113,7 @@ class UjiEmisiController extends Controller
     public function store(StoreUjiEmisiRequest $request)
     {
         $validatedData = $request->validate([
-            'odometer' => 'required', 
+            'odometer' => 'required',
             'co' => 'required',
             'hc' => 'required',
             'opasitas' => '',
@@ -124,7 +124,7 @@ class UjiEmisiController extends Controller
             'temperatur' => '',
             'lambda' => '',
         ]);
-        
+
         $lastKendaraan = Kendaraan::orderBy('id', 'desc')->first();
         $lastKendaraanId = $lastKendaraan ? $lastKendaraan->id : 0;
 
@@ -133,7 +133,7 @@ class UjiEmisiController extends Controller
         if ($idKendaraanBaru) {
             $validatedData['user_id'] = auth()->user()->id;
             $validatedData['kendaraan_id'] = $idKendaraanBaru;
-            
+
 
 
             $ujiemisi = UjiEmisi::create($validatedData);
@@ -143,7 +143,7 @@ class UjiEmisiController extends Controller
             } else {
                 return redirect("/dashboard/ujiemisi")->with('error', 'Uji emisi berhasil ditambah tetapi kendaraan tidak lulus uji emisi');
             }
-            
+
         } else {
             return redirect('/dashboard/ujiemisi')->with('error', 'Gagal menambahkan hasil uji. Silakan coba lagi.');
         }
@@ -158,11 +158,11 @@ class UjiEmisiController extends Controller
     {
         // dd($kendaraan);
         // dd($ujiemisi);
-        return view('/dashboard/ujiemisi/edit-uji', [
+        return view('dashboard.UjiEmisi.edit-uji', [
             "bengkel_name" => auth()->user()->bengkel_name,
             'kendaraan' => $kendaraan,
             'ujiemisi' => $ujiemisi,
-        ]); 
+        ]);
     }
 
 
@@ -173,7 +173,7 @@ class UjiEmisiController extends Controller
     public function update(UpdateUjiEmisiRequest $request, UjiEmisi $ujiemisi)
     {
         $validatedData = $request->validate([
-            'odometer' => 'required', 
+            'odometer' => 'required',
             'co' => 'required|numeric',
             'hc' => 'required',
             'opasitas' => '',
@@ -205,7 +205,7 @@ class UjiEmisiController extends Controller
 
     private function checkIsLulus($ujiemisi) {
         $isLulus = false;
-        // ini baru untuk bensin 
+        // ini baru untuk bensin
         if ($ujiemisi->kendaraan->bahan_bakar == "Bensin") {
             switch ($ujiemisi->kendaraan->kendaraan_kategori) {
               case '1':
@@ -223,7 +223,7 @@ class UjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               case '2':
                   if ($ujiemisi->kendaraan->tahun < 2007) {
                       if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
@@ -239,7 +239,7 @@ class UjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               case '3':
                   if ($ujiemisi->kendaraan->tahun < 2007) {
                       if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
@@ -255,7 +255,7 @@ class UjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
                 case '4': // 2 tak
                     if ($ujiemisi->kendaraan->tahun < 2010) {
                         if ($ujiemisi->co <= 4.5 && $ujiemisi->hc <=6000) {
@@ -271,7 +271,7 @@ class UjiEmisiController extends Controller
                         }
                     }
                     break;
-  
+
                 case '5': // 4 tak
                     if ($ujiemisi->kendaraan->tahun < 2010) {
                         if ($ujiemisi->co <= 5.5 && $ujiemisi->hc <=2200) {
@@ -287,7 +287,7 @@ class UjiEmisiController extends Controller
                         }
                     }
                     break;
-              
+
               default:
                   break;
           }
@@ -312,7 +312,7 @@ class UjiEmisiController extends Controller
 
     public function destroy(UjiEmisi $ujiemisi)
     {
-        
+
         UjiEmisi::destroy($ujiemisi->id);
         return redirect('/dashboard/ujiemisi')->with('success', 'Hasil uji berhasil dihapus');
         //

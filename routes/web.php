@@ -39,11 +39,11 @@ Route::resource('/dashboard/ujiemisi', DashboardUjiEmisiController::class)->midd
 
 // Route::get('/list-kendaraan', [KendaraanController::class,'index'])->middleware('auth');
 Route::get('/insert-uji', function () {
-    return view('dashboard/ujiemisi/insert-uji', [UjiEmisiController::class,'index']);
+    return view('dashboard.UjiEmisi.insert-uji', [UjiEmisiController::class, 'index']);
 })->middleware('auth');
 
 Route::get('/input-sertif', function () {
-    return view('dashboard/ujiemisi/input-sertif');
+    return view('dashboard.UjiEmisi.input-sertif');
 })->middleware('auth');
 
 // Route::get('/form-kendaraan', function () {
@@ -53,14 +53,14 @@ Route::get('/input-sertif', function () {
 //     return view('form-kendaraan', [KendaraanController::class,'index']);
 // })->middleware('auth');
 
-Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class,'authenticate']);
-Route::post('/logout', [LoginController::class,'logout']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 // Route::get('/register', [RegisterController::class,'index'])->middleware('guest');
 // Route::post('/register', [RegisterController::class,'store']);
 
-Route::get('/dashboard', [DashboardController::class,'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::resource('/dashboard/kendaraan', DashboardKendaraanController::class)->middleware('auth');
 

@@ -23,7 +23,7 @@ class DashboardUjiEmisiController extends Controller
             })->get();
         }
 
-        return view('/dashboard/ujiemisi/index', [
+        return view('dashboard.UjiEmisi.index', [
             "title" => "List Kendaraan",
             "kendaraans" => $kendaraans
         ]);
@@ -31,11 +31,11 @@ class DashboardUjiEmisiController extends Controller
 
     /**
      * Show the form for creating a new resource.
-    //  * @return \Illuminate\Http\Response
+      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('/dashboard/ujiemisi/insert-uji');
+        return view('dashboard.UjiEmisi.insert-uji');
     }
 
     /**
@@ -59,9 +59,9 @@ class DashboardUjiEmisiController extends Controller
      */
     public function edit(UjiEmisi $ujiEmisi)
     {
-        return view('/dashboard/ujiemisi/edit-uji', [
+        return view('dashboard.UjiEmisi.edit-uji', [
             'ujiemisi' => $ujiEmisi,
-        ]); 
+        ]);
     }
 
     /**
