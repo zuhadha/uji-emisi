@@ -366,7 +366,7 @@ class KendaraanUjiEmisiController extends Controller
         $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
 
         $row=21;
-        $table=155+18+2;
+        $table=155+18;
         $space_per_row=4.1;
         $little_space=0.2;
         $column=35+26-7;
