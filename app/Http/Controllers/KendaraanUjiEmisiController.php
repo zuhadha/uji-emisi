@@ -369,7 +369,7 @@ class KendaraanUjiEmisiController extends Controller
         $table=155+18+4;
         $space_per_row=4.1;
         $little_space=0.2;
-        $column=35+26-4;
+        $column=35+26-7;
 
         // setting nama kepala bengkel
         $kepala_bengkel = $ujiemisi->user->kepala_bengkel;
