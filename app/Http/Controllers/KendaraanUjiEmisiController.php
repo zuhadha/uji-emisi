@@ -315,7 +315,7 @@ class KendaraanUjiEmisiController extends Controller
         $expirationDate = Carbon::createFromFormat('d-m-Y', $formattedDate)->addYear()->format('d-m-Y');
         $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
 
-        $row=23;
+        $row=24;
         $table=155;
         $space_per_row=4.3;
         $column=35;
