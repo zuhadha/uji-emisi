@@ -344,7 +344,7 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*7)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
         $pdf->Text($column,$row+($space_per_row*8),strtoupper($ujiemisi->odometer));
         $pdf->Text($column,$row+($space_per_row*9),strtoupper($ujiemisi->kendaraan->user->bengkel_name));
-        $pdf->Text($column,$row+($space_per_row*10),strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+1.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->Text($column,$row+($space_per_row*10)+0.5,strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+0.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
 
         $pdf->SetFont('courier', 'B', 9);
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
