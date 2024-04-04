@@ -114,15 +114,18 @@ class KendaraanUjiEmisiController extends Controller
             'kendaraan_kategori' => 'required',
             'bahan_bakar' => 'required',
             'odometer' => 'required', // tambahkan validasi uji emisi juga di sini
-            'co' => 'required',
-            'hc' => 'required',
-            'opasitas' => '',
+            'co' =>'',
+            'hc' => 'integer',
+            'opasitas' => 'integer',
             'co2' => '',
             'co_koreksi' => '',
             'o2' => '',
             'putaran' => '',
             'temperatur' => '',
             'lambda' => '',
+        ], [
+            'hc.integer' => 'HC harus berupa bilangan bulat',
+            'opasitas.integer' => 'Opasitas harus berupa bilangan bulat'
         ]);
 
         $kendaraan = Kendaraan::where('nopol', $validatedData['nopol'])->first();

@@ -189,7 +189,7 @@
                       </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="opasitas" class="col-sm-4 col-form-label">Opasitas</label>
+                      <label for="opasitas" class="col-sm-4 col-form-label">Opasitas<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
                           <input type="number" class="form-control @error('opasitas') is-invalid @enderror" id="opasitas" name="opasitas" required step='any' value="{{ old('opasitas', $ujiemisi->opasitas) }}">
                           

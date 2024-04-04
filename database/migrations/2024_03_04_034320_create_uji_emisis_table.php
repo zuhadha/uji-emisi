@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('kendaraan_id');
             $table->foreignId('user_id');
             $table->integer('odometer');
-            $table->float('co');
-            $table->integer('hc');
+            $table->float('co')->nullable();
+            $table->integer('hc')->nullable();
             $table->float('opasitas')->nullable();
             $table->float('co2')->nullable();
             $table->float('co_koreksi')->nullable();

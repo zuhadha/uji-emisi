@@ -115,14 +115,17 @@ class UjiEmisiController extends Controller
         $validatedData = $request->validate([
             'odometer' => 'required',
             'co' => '',
-            'hc' => '',
-            'opasitas' => '',
+            'hc' => 'integer',
+            'opasitas' => 'integer',
             'co2' => '',
             'co_koreksi' => '',
             'o2' => '',
             'putaran' => '',
             'temperatur' => '',
             'lambda' => '',
+        ], [
+            'hc.integer' => 'HC harus berupa bilangan bulat',
+            'opasitas.integer' => 'Opasitas harus berupa bilangan bulat'
         ]);
 
         $lastKendaraan = Kendaraan::orderBy('id', 'desc')->first();
@@ -174,15 +177,18 @@ class UjiEmisiController extends Controller
     {
         $validatedData = $request->validate([
             'odometer' => 'required',
-            'co' => 'required|numeric',
-            'hc' => 'required',
-            'opasitas' => '',
+            'co' => '',
+            'hc' => 'integer',
+            'opasitas' => 'integer',
             'co2' => '',
             'co_koreksi' => '',
             'o2' => '',
             'putaran' => '',
             'temperatur' => '',
             'lambda' => '',
+        ], [
+            'hc.integer' => 'HC harus berupa bilangan bulat',
+            'opasitas.integer' => 'Opasitas harus berupa bilangan bulat'
         ]);
 
         // $idKendaraan = session()->get('idKendaraan');
