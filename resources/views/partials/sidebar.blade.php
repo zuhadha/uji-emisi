@@ -35,11 +35,13 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                @can('admin')
                 <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
                     aria-expanded="false" aria-controls="dashboard">
                     <i class="fa fa-car pe-2"></i>
                     Kendaraan
                 </a>
+                @endcan
                 <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a href="/dashboard/kendaraan" class="sidebar-link">List Kendaraan</a>
