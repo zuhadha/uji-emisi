@@ -114,8 +114,8 @@ class UjiEmisiController extends Controller
     {
         $validatedData = $request->validate([
             'odometer' => 'required',
-            'co' => 'required',
-            'hc' => 'required',
+            'co' => '',
+            'hc' => '',
             'opasitas' => '',
             'co2' => '',
             'co_koreksi' => '',
