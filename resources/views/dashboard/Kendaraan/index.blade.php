@@ -14,9 +14,11 @@
 
     
     <div class="row">
+        @can('admin')
         <div class="col-lg-4">
             <a href="/dashboard/kendaraan/create" class="btn add-button mb-3">Tambah Kendaraan</a>
         </div>
+        @endcan
         <div class="col-lg-4  d-flex justify-content-end">
         </div>
         <form class="col-lg-3 d-flex justify-content-end" method="GET" action="/dashboard/kendaraan">

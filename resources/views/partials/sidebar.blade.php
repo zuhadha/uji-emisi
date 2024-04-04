@@ -44,9 +44,11 @@
                     <li class="sidebar-item">
                         <a href="/dashboard/kendaraan" class="sidebar-link">List Kendaraan</a>
                     </li>
+                    @can('admin')
                     <li class="sidebar-item">
                         <a href="/dashboard/kendaraan/create" class="sidebar-link">Tambah Kendaraan</a>
                     </li>
+                    @endcan
                 </ul>
             </li>
 
