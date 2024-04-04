@@ -348,7 +348,7 @@
                 document.getElementById('co').disabled = true;
                 document.getElementById('hc').disabled = true;
             } else if (bahanBakar === 'Gas') {
-                document.getElementById('opasitas').disabled = false;
+                document.getElementById('opasitas').disabled = true;
                 document.getElementById('co').disabled = false;
                 document.getElementById('hc').disabled = false;
             }
