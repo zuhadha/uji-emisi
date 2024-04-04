@@ -28,8 +28,6 @@ class KendaraanUjiEmisiController extends Controller
      */
     public function create(Kendaraan $kendaraan, UjiEmisi $ujiemisi)
     {
-        // dd($ujiemisi);
-        // dd($kendaraan);
         return view('dashboard/ujiemisi/insert-uji', [
             "bengkel_name" => auth()->user()->bengkel_name,
             "kendaraan" => $kendaraan,
@@ -75,23 +73,25 @@ class KendaraanUjiEmisiController extends Controller
 
         $ujiemisi->update($validatedData);
 
-        // dd($ujiemisi);
-        // dd($request);
 
-        // Cetak PDF
-        // $pdfContent = $this->cetakPdf($ujiemisi);
-
-        // dd($pdfContent);
-        // // Kembalikan respons HTTP dengan konten PDF
-        // return response($pdfContent)
-        //     ->header('Content-Type', 'application/pdf');
 
         $message = new HtmlString("Kendaraan dengan nomor polisi {$ujiemisi->kendaraan->nopol} dinyatakan <strong>lulus</strong> uji emisi");
         // return redirect('/dashboard/ujiemisi')->with('success', $message);
 
         Session::put('ujiemisi', $ujiemisi);
 
-        return redirect('/dashboard/cetak');
+            // Memeriksa tombol yang ditekan
+        $printType = $request->input('print_type');
+
+        // Mengarahkan pengguna ke rute yang sesuai berdasarkan tombol yang ditekan
+        if ($printType === 'dot_matrix') {
+            return redirect('/dashboard/cetak/dotmatrix');
+        } elseif ($printType === 'printer') {
+            return redirect('/dashboard/cetak/printer');
+        }
+
+
+        // return redirect('/dashboard/cetak/dotmatrix');
         // return redirect('/dashboard/ujiemisi')->with('success', $message)->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
 
     }
@@ -306,14 +306,14 @@ class KendaraanUjiEmisiController extends Controller
         return $isLulus;
     }
 
-    public function cetakPdf() {
+    public function cetakPdfDotMatrix() {
         $ujiemisi = Session::get('ujiemisi');
 
         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $ujiemisi->tanggal_uji)->format('d-m-Y');
         $expirationDate = Carbon::createFromFormat('d-m-Y', $formattedDate)->addYear()->format('d-m-Y');
         $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
 
-        $row=24;
+        $row=23;
         $table=155;
         $space_per_row=4.3;
         $column=35;
@@ -328,8 +328,8 @@ class KendaraanUjiEmisiController extends Controller
 
         $kepala_bengkel_baru_formatted = str_pad($kepala_bengkel, 16, ' ', STR_PAD_BOTH);
 
-        // $pdf = new FPDF('L','mm',array(203.2,78)); //tambah 2 karena kepotong // original
-        $pdf = new FPDF('P','mm',array(203.2,203.2)); //tambah 2 karena kepotong // coba buat printer
+        $pdf = new FPDF('L','mm',array(203.2,78)); //tambah 2 karena kepotong // original
+        // $pdf = new FPDF('P','mm',array(203.2,203.2)); //tambah 2 karena kepotong // coba buat printer
         $pdf->AddPage();
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
@@ -345,6 +345,55 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*10),strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+1.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
 
         $pdf->SetFont('courier', 'B', 9);
+        $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
+        $pdf->SetFont('courier','',9);
+        $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
+        // $pdf->Text(168,97,strtoupper("test"));
+        $pdf->Output();
+        // $pdf->Output('F', public_path('pdf/' . $fileName));
+
+        $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '.pdf';
+        exit;
+    }
+
+    public function cetakPdfPrinter() {
+        $ujiemisi = Session::get('ujiemisi');
+
+        $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $ujiemisi->tanggal_uji)->format('d-m-Y');
+        $expirationDate = Carbon::createFromFormat('d-m-Y', $formattedDate)->addYear()->format('d-m-Y');
+        $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
+
+        $row=21;
+        $table=155+18+4;
+        $space_per_row=4.1;
+        $little_space=0.2;
+        $column=35+26-4;
+
+        // setting nama kepala bengkel
+        $kepala_bengkel = $ujiemisi->user->kepala_bengkel;
+        if (strlen($kepala_bengkel) > 16) {
+            // Potong kata terakhir dan ambil huruf pertama
+            $last_space_position = strrpos(substr($kepala_bengkel, 0, 16), ' ');
+            $kepala_bengkel = substr($kepala_bengkel, 0, $last_space_position) . ' ' . substr($kepala_bengkel, $last_space_position + 1, 1) . '.';
+        }
+
+        $kepala_bengkel_baru_formatted = str_pad($kepala_bengkel, 16, ' ', STR_PAD_BOTH);
+
+        $pdf = new FPDF('P','mm',array(203.2, 297));
+        $pdf->AddPage();
+        $pdf->SetFont('courier','',9);
+        $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
+        $pdf->Text($column,$row+$space_per_row,strtoupper($ujiemisi->kendaraan->merk));
+        $pdf->Text($column,$row+($space_per_row*2),strtoupper($ujiemisi->kendaraan->tipe));$pdf->Text($table,$row+($space_per_row*3)-1,$ujiemisi->co);
+        $pdf->Text($column,$row+($space_per_row*3),strtoupper($ujiemisi->kendaraan->tahun));$pdf->Text($table,$row+($space_per_row*4)-1,$ujiemisi->hc);
+        $pdf->Text($column,$row+($space_per_row*4)+($little_space),strtoupper($ujiemisi->kendaraan->cc));
+        $pdf->Text($column,$row+($space_per_row*5)+($little_space*2),strtoupper($ujiemisi->kendaraan->no_rangka));$pdf->Text($table,$row+($space_per_row*6)-1,$ujiemisi->opasitas);
+        $pdf->Text($column,$row+($space_per_row*6)+($little_space*3),strtoupper($ujiemisi->kendaraan->no_mesin));
+        $pdf->Text($column,$row+($space_per_row*7)+($little_space*4),strtoupper($ujiemisi->kendaraan->bahan_bakar));
+        $pdf->Text($column,$row+($space_per_row*8)+($little_space*5),strtoupper($ujiemisi->odometer));
+        $pdf->Text($column,$row+($space_per_row*9)+($little_space*5),strtoupper($ujiemisi->kendaraan->user->bengkel_name));
+        $pdf->Text($column,$row+($space_per_row*10)+($little_space*4),strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+1,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->SetFont('courier','B',9);
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));

@@ -27,9 +27,10 @@ use App\Models\Kendaraan;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('/dashboard');
+// })->middleware('auth');
+Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 Route::resource('/dashboard/ujiemisi', DashboardUjiEmisiController::class)->middleware('auth');
 
@@ -81,6 +82,7 @@ Route::post('/dashboard/ujiemisi/input-sertif/{ujiemisi_id}/input-nomor', [UjiEm
 Route::post('/dashboard/ujiemisi/input-sertif/input-nomor', [UjiEmisiController::class, 'inputSertifikat'])->name('ujiemisi.insert.create');
 
 // test pdf
-Route::get('/dashboard/cetak', [KendaraanUjiEmisiController::class, 'cetakPdf']);
+Route::get('/dashboard/cetak/dotmatrix', [KendaraanUjiEmisiController::class, 'cetakPdfDotMatrix']);
+Route::get('/dashboard/cetak/printer', [KendaraanUjiEmisiController::class, 'cetakPdfPrinter']);
 
 Route::get('/export', [ExportController::class, 'export'])->name('export');

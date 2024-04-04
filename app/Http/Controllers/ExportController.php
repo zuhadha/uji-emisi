@@ -67,11 +67,14 @@ class ExportController extends Controller
         $spreadsheet->getActiveSheet()->setCellValue('F1', 'Tanggal Uji')->getStyle('F1')->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->setCellValue('G1', 'Odometer')->getStyle('G1')->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->setCellValue('H1', 'CO')->getStyle('H1')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->setCellValue('I1', 'HC')->getStyle('I1')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->setCellValue('J1', 'Opasitas')->getStyle('J1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->setCellValue('I1', 'CO2')->getStyle('I1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->setCellValue('J1', 'HC')->getStyle('J1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->setCellValue('K1', 'Opasitas')->getStyle('K1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->setCellValue('L1', 'O2')->getStyle('L1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->setCellValue('M1', 'Lambda')->getStyle('M1')->getFont()->setBold(true);
 
         // Set light grey background color for all header cells
-        $headerCells = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1'];
+        $headerCells = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1'];
         foreach ($headerCells as $cell) {
             $spreadsheet->getActiveSheet()->getStyle($cell)->getFill()->setFillType(Fill::FILL_SOLID);
             $spreadsheet->getActiveSheet()->getStyle($cell)->getFill()->getStartColor()->setRGB('D3D3D3'); // Light grey color
@@ -85,18 +88,19 @@ class ExportController extends Controller
             $spreadsheet->getActiveSheet()->setCellValue('C' . $row, $ujiemisi->kendaraan->tipe);
             $spreadsheet->getActiveSheet()->setCellValue('D' . $row, $ujiemisi->kendaraan->tahun);
             $spreadsheet->getActiveSheet()->setCellValue('E' . $row, $ujiemisi->kendaraan->bahan_bakar);
-            // $spreadsheet->getActiveSheet()->setCellValue('F' . $row, $ujiemisi->tanggal_uji);
             $spreadsheet->getActiveSheet()->setCellValue('F' . $row, date('d/m/Y', strtotime($ujiemisi->tanggal_uji)));
-
             $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $ujiemisi->odometer);
             $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $ujiemisi->co);
-            $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $ujiemisi->hc);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $ujiemisi->opasitas);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $ujiemisi->co2);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $ujiemisi->hc);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $ujiemisi->opasitas);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $ujiemisi->o2);
+            $spreadsheet->getActiveSheet()->setCellValue('M' . $row, $ujiemisi->lambda);
             $row++;
         }
     
         // Apply black border with 1px weight for the entire table
-        $spreadsheet->getActiveSheet()->getStyle('A1:J' . ($row - 1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $spreadsheet->getActiveSheet()->getStyle('A1:M' . ($row - 1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
     
         // Create a writer object for Xlsx format
         $writer = new Xlsx($spreadsheet);

@@ -86,9 +86,6 @@
                             @enderror
                         </div>
                     </div>
-                    
-
-
 
                     <div class="mb-3 row">
                         <label for="no_mesin" class="col-sm-4 col-form-label" focus>No Mesin</label>
@@ -104,31 +101,26 @@
                     </div>
 
                     <div class="row mb-3">
-
                         <div class="col-sm-4">
                             <label class="form-label">Kategori<span class="text-danger">*</span></label>
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" name="kendaraan_kategori">
-                                @php
-                                    $counter = 1;
-                                @endphp
-                                @foreach(['Angkutan Orang', 'Angkutan Barang', 'Angkutan Gandengan', 'Sepeda Motor 2 Tak', 'Sepeda Motor 4 Tak'] as $kategori)
-                                    @if (old('kendaraan_kategori') == $counter || ((isset($kendaraan) && isset($kendaraan->kendaraan_kategori) && $kendaraan->kendaraan_kategori == $kategori)))
-                                        <option selected value="{{ $counter }}">{{ $kategori }}</option>    
-                                    @else
-                                        <option value="{{ $counter }}">{{ $kategori }}</option>
-                                    @endif
+                                @foreach(['Angkutan Orang', 'Angkutan Barang', 'Angkutan Gandengan', 'Sepeda Motor 2 Tak', 'Sepeda Motor 4 Tak'] as $index => $kategori)
                                     @php
-                                        $counter++;
+                                        if ($kendaraan==null) {
+                                            $selected = 0;
+                                        } else {
+                                            $selected = (old('kendaraan_kategori') == $index+1 || (isset($kendaraan) && $kendaraan->kendaraan_kategori == $index+1));
+                                            
+                                        }
                                     @endphp
+                                    
+                                    <option value="{{ $index+1 }}" {{ $selected ? 'selected' : '' }}>{{ $kategori }}</option>
                                 @endforeach
-                            </select>
+                            </select>                 
                         </div>
                     </div>
-
-
-
                     
                     <div class="mb-3 row">
                         <div class="col-sm-4">

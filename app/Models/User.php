@@ -21,13 +21,16 @@ class User extends Authenticatable
         'username',
         'password',
         'bengkel_name',
+        'perusahaan_name',
         'kepala_bengkel',
         'jalan',
         'kab_kota',
         'kecamatan',
         'kelurahan',
         'is_admin',
-        'user_kategori'
+        'user_kategori',
+        'alat_uji',
+        'tanggal_kalibrasi_alat'
     ];
 
     /**

@@ -34,11 +34,14 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('admin'),
             'bengkel_name' => 'Administrator',
+            'perusahaan_name' => 'Toyota',
             'kepala_bengkel' => 'Saka Media Satwika',
             'jalan' => 'Sauyunan',
             'kab_kota' => 'Bandung',
             'kecamatan' => 'Panyileukan',
             'kelurahan' => 'Cipadung Kidul',
+            'alat_uji' => 'Gasboard-5020 Automobile Emission Gas Analyzer',
+            'tanggal_kalibrasi_alat' => today(),
             'is_admin' => true,
         ]);
 

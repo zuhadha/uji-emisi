@@ -40,11 +40,12 @@
                                 @method('put')
                                 @csrf
                                 <div class="row">
-                                    <div class="col-lg-7 px-0 my-0">
-                                        <input type="text" class="px-2 form-control custom-placeholder2 rounded-left-bottom" name="no_sertifikat" placeholder="Contoh: AA123456">    
+                                    <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456">    
+                                    <div class="col px-0 mt-2">
+                                        <button type="submit" class="btn btn-primary" name="print_type" value="dot_matrix">Cetak Dot Matrix<i class="fa fa-braille ms-2"></i></button>
                                     </div>
-                                    <div class="col-lg-5 px-0">
-                                        <button type="submit" class="btn btn-primary rounded-right-bottom">Simpan <i class="fa fa-pencil-square-o"></i></button>
+                                    <div class="col px-0 mt-2">
+                                        <button type="submit" class="btn btn-primary" name="print_type" value="printer">Cetak Printer<i class="fa fa-print ms-2"></i></button>
                                     </div>
                                 </div>
                             </form>

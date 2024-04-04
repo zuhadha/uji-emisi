@@ -20,8 +20,8 @@ class PdfController extends Controller
     {
         $ujiemisi = UjiEmisi::findOrFail(4);
 
-        // $pdf = new FPDF('L','mm',array(250,103));  // original
-        $pdf = new FPDF('P','mm',array(250,103)); // trying portrait
+        $pdf = new FPDF('L','mm',array(250,103));  // original
+        // $pdf = new FPDF('P','mm',array(250,103)); // trying portrait
         $pdf->AddPage();
         $pdf->SetFont('courier','B',11);
         $pdf->Text(45,15,date("d-m-Y"));$pdf->Text(125,20,"test");

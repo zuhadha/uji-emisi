@@ -36,6 +36,7 @@ class UserAdminController extends Controller
     {
         $validatedData = $request->validate([
             'bengkel_name' => 'required',
+            'perusahaan_name' => 'required',
             'username' => 'required', 
             'kepala_bengkel' => 'required', 
             'password' => 'required',
@@ -43,6 +44,8 @@ class UserAdminController extends Controller
             'kab_kota' => '',
             'kecamatan' => '',
             'kelurahan' => '',
+            'alat_uji' => '',
+            'tanggal_kalibrasi_alat' => '',
         ]);
 
         User::create($validatedData);
@@ -98,13 +101,16 @@ class UserAdminController extends Controller
 {
     $validatedData = $request->validate([
         'bengkel_name' => 'required',
-        'username' => 'required',
+        'perusahaan_name' => 'required',
+        'username' => 'required', 
         'kepala_bengkel' => 'required', 
-        'password' => '',
+        'password' => 'required',
         'jalan' => '',
         'kab_kota' => '',
         'kecamatan' => '',
         'kelurahan' => '',
+        'alat_uji' => '',
+        'tanggal_kalibrasi_alat' => '',
     ]);
 
     // Menambahkan user_id

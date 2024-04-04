@@ -18,7 +18,6 @@
             <a href="/dashboard/kendaraan/create" class="btn add-button mb-3">Tambah Kendaraan</a>
         </div>
         <div class="col-lg-4  d-flex justify-content-end">
-            <button  type="submit" class="btn btn-primary mb-3">Export</button>
         </div>
         <form class="col-lg-3 d-flex justify-content-end" method="GET" action="/dashboard/kendaraan">
             <div class="row">

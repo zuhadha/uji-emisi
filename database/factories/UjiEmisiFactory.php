@@ -45,7 +45,7 @@ class UjiEmisiFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, 10),
             'odometer' => $this->faker->numberBetween(10000, 1000000),
             'co' => $this->faker->randomFloat(2, 1, 10),
-            'hc' => $this->faker->randomFloat(0, 100, 2000),
+            'hc' => $this->faker->randomFloat(0, 100, 1000),
             'opasitas' => $this->faker->randomFloat(2, 1, 100),
             'co2' => $this->faker->randomFloat(2, 1, 10),
             'co_koreksi' => $this->faker->randomFloat(2, 1, 10),

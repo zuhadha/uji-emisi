@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('bengkel_name');
+            $table->string('perusahaan_name');
             $table->string('kepala_bengkel');
             $table->string('jalan')->nullable();
             $table->string('kab_kota')->nullable();
@@ -23,6 +24,8 @@ return new class extends Migration
             $table->string('kelurahan')->nullable();
             $table->boolean('is_admin');
             $table->string('user_kategori');
+            $table->string('alat_uji')->nullable();
+            $table->date('tanggal_kalibrasi_alat')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
