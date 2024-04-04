@@ -20,7 +20,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="perusahaan_name" class="form-label">Nama Perusahaan<span class="text-danger">*</span></label>
+                        <label for="perusahaan_name" class="form-label">Nama Cabang<span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('perusahaan_name') is-invalid @enderror" id="perusahaan_name" name="perusahaan_name" required value="{{ old('perusahaan_name') }}">
                         @error('perusahaan_name')
                             <div class="invalid-feedback">
