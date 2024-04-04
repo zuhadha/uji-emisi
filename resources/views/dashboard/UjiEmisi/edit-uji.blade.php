@@ -191,13 +191,13 @@
                     <div class="mb-3 row">
                       <label for="opasitas" class="col-sm-4 col-form-label">Opasitas</label>
                       <div class="col-sm-8">
-                          <input type="number" class="form-control @error('opasitas') is-invalid @enderror" id="opasitas" name="opasitas" required value="{{ old('opasitas', $ujiemisi->opasitas) }}">
+                          <input type="number" class="form-control @error('opasitas') is-invalid @enderror" id="opasitas" name="opasitas" required step='any' value="{{ old('opasitas', $ujiemisi->opasitas) }}">
+                          
                           @error('opasitas')
                               <div class="invalid-feedback">
                                   {{ $message }}
                               </div>
                           @enderror
-
                       </div>
                     </div>
                     <div class="mb-3 row">
