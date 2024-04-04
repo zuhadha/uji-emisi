@@ -28,11 +28,13 @@ class KendaraanUjiEmisiController extends Controller
      */
     public function create(Kendaraan $kendaraan, UjiEmisi $ujiemisi)
     {
-        return view('dashboard/ujiemisi/insert-uji', [
+        // dd($ujiemisi);
+        // dd($kendaraan);
+        return view('dashboard.UjiEmisi.insert-uji', [
             "bengkel_name" => auth()->user()->bengkel_name,
             "kendaraan" => $kendaraan,
             "ujiemisi" => $ujiemisi,
-        ]); 
+        ]);
     }
 
 
@@ -41,8 +43,8 @@ class KendaraanUjiEmisiController extends Controller
 
         $kendaraan = Kendaraan::findOrFail($kendaraan_id);
         // dd($kendaraan);
-        
-        return view('dashboard.ujiemisi.insert-uji', [
+
+        return view('dashboard.UjiEmisi.insert-uji', [
             "bengkel_name" => auth()->user()->bengkel_name,
             'kendaraan' => $kendaraan
         ]);
@@ -50,19 +52,19 @@ class KendaraanUjiEmisiController extends Controller
 
     public function showInputSertifikat($ujiemisi_id)
     {
-        // $ujiemisi = 
+        // $ujiemisi =
         $ujiemisiLulus = UjiEmisi::findOrFail($ujiemisi_id);
         // dd($ujiemisiLulus);
         $tanggal = Carbon::parse($ujiemisiLulus->tanggal_uji)->locale('id')->translatedFormat('l, d F Y');
 
 
-        return view('dashboard.ujiemisi.input-sertif', [
+        return view('dashboard.UjiEmisi.input-sertif', [
             "bengkel_name" => auth()->user()->bengkel_name,
             "ujiemisi" => $ujiemisiLulus,
             "tanggal_uji" => $tanggal,
         ]);
     }
-    
+
     public function inputSertifikat(Request $request, $ujiemisi_id)
     {
         // $ujiemisi = UjiEmisi::findOrFail($ujiemisi_id);
@@ -102,7 +104,7 @@ class KendaraanUjiEmisiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nopol' => 'required', 
+            'nopol' => 'required',
             'merk' => 'required',
             'tipe' => 'required',
             'tahun' => 'required|gt:1900',
@@ -136,7 +138,7 @@ class KendaraanUjiEmisiController extends Controller
         $ujiEmisiData['user_id'] = auth()->user()->id;
         $ujiEmisiData['kendaraan_id'] = $kendaraan->id;
         $ujiemisi = UjiEmisi::create($ujiEmisiData);
-        
+
         if ($this->checkIsLulus($ujiemisi)) {
             return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}/input-nomor")->with('success', "Kendaraan dinyatakan lulus uji emisi");
         } else {
@@ -152,7 +154,7 @@ class KendaraanUjiEmisiController extends Controller
         //     'kendaraan' => $kendaraan,
         //     "tanggal_uji" => $tanggal,
         // ]);
-        
+
 
 
         // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}")->with('success', 'Kendaraan memenuhi standard dan dinyatakan lulus uji emisi');
@@ -160,7 +162,7 @@ class KendaraanUjiEmisiController extends Controller
         // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}")->with('success', 'Kendaraan memenuhi standard dan dinyatakan lulus uji emisi');
 
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -180,7 +182,7 @@ class KendaraanUjiEmisiController extends Controller
         //     "bengkel_name" => auth()->user()->bengkel_name,
         //     'kendaraan' => $kendaraan,
         //     'ujiemisi' => $ujiemisi,
-        // ]); 
+        // ]);
     }
 
     /**
@@ -201,7 +203,7 @@ class KendaraanUjiEmisiController extends Controller
 
     private function checkIsLulus($ujiemisi) {
         $isLulus = false;
-        // ini baru untuk bensin 
+        // ini baru untuk bensin
         if ($ujiemisi->kendaraan->bahan_bakar == "Bensin") {
             switch ($ujiemisi->kendaraan->kendaraan_kategori) {
               case '1':
@@ -219,7 +221,7 @@ class KendaraanUjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               case '2':
                   if ($ujiemisi->kendaraan->tahun < 2007) {
                       if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
@@ -235,7 +237,7 @@ class KendaraanUjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               case '3':
                   if ($ujiemisi->kendaraan->tahun < 2007) {
                       if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
@@ -251,7 +253,7 @@ class KendaraanUjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               case '4': // 2 tak
                   if ($ujiemisi->kendaraan->tahun < 2010) {
                       if ($ujiemisi->co <= 4.5 && $ujiemisi->hc <=6000) {
@@ -283,7 +285,7 @@ class KendaraanUjiEmisiController extends Controller
                       }
                   }
                   break;
-              
+
               default:
                   break;
           }

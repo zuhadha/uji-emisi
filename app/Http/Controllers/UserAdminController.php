@@ -14,7 +14,7 @@ class UserAdminController extends Controller
     {
         $users = User::all();
 
-        return view('/dashboard/user/index', [
+        return view('dashboard.User.index', [
             "title" => "Manajemen Pengguna",
             "users" => $users,
             "bengkel_name" => auth()->user()->bengkel_name,
@@ -26,7 +26,7 @@ class UserAdminController extends Controller
      */
     public function create()
     {
-        return view('/dashboard/user/form-user');
+        return view('dashboard.User.form-user');
     }
 
     /**
@@ -37,8 +37,8 @@ class UserAdminController extends Controller
         $validatedData = $request->validate([
             'bengkel_name' => 'required',
             'perusahaan_name' => 'required',
-            'username' => 'required', 
-            'kepala_bengkel' => 'required', 
+            'username' => 'required',
+            'kepala_bengkel' => 'required',
             'password' => 'required',
             'jalan' => '',
             'kab_kota' => '',
@@ -67,9 +67,9 @@ class UserAdminController extends Controller
      */
     public function edit(User $user)
     {
-        return view('/dashboard/user/edit-user', [
+        return view('dashboard.User.edit-user', [
             'user' => $user,
-        ]); 
+        ]);
     }
 
     /**
@@ -80,7 +80,7 @@ class UserAdminController extends Controller
     // {
     //     $validatedData = $request->validate([
     //         'bengkel_name' => 'required',
-    //         'username' => 'required', 
+    //         'username' => 'required',
     //         'password' => 'required',
     //         'jalan' => '',
     //         'kab_kota' => '',
@@ -89,7 +89,7 @@ class UserAdminController extends Controller
     //     ]);
 
     //     $validatedData['user_id'] = auth()->user()->id;
-        
+
 
     //     User::where('id', $user->id)->update($validatedData);
 

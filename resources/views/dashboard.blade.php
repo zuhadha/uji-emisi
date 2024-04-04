@@ -60,7 +60,7 @@
                                 <td>{{ $ujiemisi->kendaraan->nopol }}</td>
                                 <td>{{ $ujiemisi->kendaraan->merk }} {{ $ujiemisi->kendaraan->tipe }}
                                     {{ $ujiemisi->kendaraan->tahun }}</td>
-                                <td>{{ $ujiemisi->tanggal_uji }}</td>
+                                <td>{{ $ujiemisi->tanggal_uji->isoFormat('LLLL') }}</td>
                                 <td>{{ $ujiemisi->odometer }}</td>
                                 <td>{{ $ujiemisi->co }}/{{ $ujiemisi->hc }}/{{ $ujiemisi->opasitas }}</td>
                                 <td><a href="#"

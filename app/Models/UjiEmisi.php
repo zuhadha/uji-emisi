@@ -14,6 +14,8 @@ class UjiEmisi extends Model
         'odometer', 'kendaraan_id', 'user_id', 'co', 'hc', 'opasitas', 'co2', 'co_koreksi', 'o2', 'putaran', 'tanggal_uji', 'temperatur', 'lambda', 'no_sertifikat'
     ];
 
+    public $casts = ['tanggal_uji' => 'datetime'];
+
     // menginput tanggal uji secara otomatis dengan tanggal saat ini.
     protected static function booted()
     {
