@@ -9,9 +9,11 @@
         <div class="col-3">
             <div class="card bg-white shadow">
                 <div class="card-body">
-                    <h2 class="text-center">{{ $bengkel }}</h2>
-                    <h3 class="text-center">Total Bengkel</h3>
-                    <hr>
+                    @if (auth()->user()->user_kategori != 'bengkel' || auth()->user()->is_admin)
+                        <h2 class="text-center">{{ $bengkel }}</h2>
+                        <h3 class="text-center">Total Bengkel</h3>
+                        <hr>
+                    @endif
                     <h2 class="text-center">{{ $kendaraan }}</h2>
                     <h3 class="text-center">Total Kendaraan</h3>
                     <hr>
@@ -81,11 +83,9 @@
     @foreach ($averages as $avg)
         <script>
             'use strict';
-            console.log('{{ json_encode($avg) }}');
             var data = {
                 value: '{{ $avg['value'] }}',
                 max: '{{ $avg['max'] }}',
-                // max: 10,
                 label: "Rata-Rata {{ $avg['label'] }}"
             };
 
@@ -94,7 +94,7 @@
                 data: {
                     datasets: [{
                         data: [data.value, data.max - data.value],
-                        backgroundColor: ['rgba(54, 162, 235, 0.8)', 'rgba(0, 0, 0, 0.1)'],
+                        backgroundColor: ['rgba(0, 0, 0, 0.1)', 'rgba(54, 162, 235, 0.8)'],
                         borderWidth: 0
                     }]
                 },

@@ -52,10 +52,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+
     protected $attributes = [
         'is_admin' => false,
         'user_kategori' => 'bengkel',
+        'perusahaan_name' => '-'
     ];
 
     // public function bengkel() {

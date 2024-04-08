@@ -23,16 +23,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('admin', function(User $user) {
+        Gate::define('admin', function (User $user) {
             return $user->is_admin;
         });
-        
+
+        Gate::define('dinas', function (User $user) {
+            return $user->user_kategori == 'dinas';
+        });
+
         Paginator::useBootstrap();
 
         View::composer('*', function ($view) {
             $user = auth()->user(); // or however you retrieve the user object
 
-                    // Check if user is authenticated
+            // Check if user is authenticated
             if ($user) {
                 $bengkel_name = $user->bengkel_name;
                 $perusahaan_name = $user->perusahaan_name;
@@ -48,5 +52,4 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
     }
-
 }

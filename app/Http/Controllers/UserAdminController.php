@@ -34,12 +34,14 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->isNotFilled('perusahaan_name')) $request->merge(['perusahaan_name' => '-']);
         $validatedData = $request->validate([
             'bengkel_name' => 'required',
-            'perusahaan_name' => 'required',
+            'perusahaan_name' => '',
             'username' => 'required',
             'kepala_bengkel' => 'required',
             'password' => 'required',
+            'user_kategori' => '',
             'jalan' => '',
             'kab_kota' => '',
             'kecamatan' => '',
@@ -49,7 +51,6 @@ class UserAdminController extends Controller
         ]);
 
         User::create($validatedData);
-
 
         return redirect('/dashboard/user')->with('success', 'Pengguna berhasil ditambahkan');
     }
@@ -98,29 +99,31 @@ class UserAdminController extends Controller
 
     //percobaan
     public function update(Request $request, User $user)
-{
-    $validatedData = $request->validate([
-        'bengkel_name' => 'required',
-        'perusahaan_name' => 'required',
-        'username' => 'required', 
-        'kepala_bengkel' => 'required', 
-        'password' => 'required',
-        'jalan' => '',
-        'kab_kota' => '',
-        'kecamatan' => '',
-        'kelurahan' => '',
-        'alat_uji' => '',
-        'tanggal_kalibrasi_alat' => '',
-    ]);
+    {
+        if ($request->isNotFilled('perusahaan_name')) $request->merge(['perusahaan_name' => '-']);
+        $validatedData = $request->validate([
+            'bengkel_name' => 'required',
+            'perusahaan_name' => 'required',
+            'username' => 'required',
+            'kepala_bengkel' => 'required',
+            'password' => 'required',
+            'user_kategori' => '',
+            'jalan' => '',
+            'kab_kota' => '',
+            'kecamatan' => '',
+            'kelurahan' => '',
+            'alat_uji' => '',
+            'tanggal_kalibrasi_alat' => '',
+        ]);
 
-    // Menambahkan user_id
-    $validatedData['user_id'] = auth()->user()->id;
+        // Menambahkan user_id
+        $validatedData['user_id'] = auth()->user()->id;
 
-    // Melakukan update data user
-    $user->update($validatedData);
+        // Melakukan update data user
+        $user->update($validatedData);
 
-    return redirect('/dashboard/user')->with('success', 'User berhasil diedit');
-}
+        return redirect('/dashboard/user')->with('success', 'User berhasil diedit');
+    }
 
 
     /**

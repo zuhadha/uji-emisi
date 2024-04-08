@@ -15,7 +15,7 @@ class DashboardKendaraanController extends Controller
 
         $keyword=$request->keyword;
 
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->is_admin || auth()->user()->user_kategori != 'bengkel') {
             // If the logged-in user is an admin, query all rows
             // $kendaraans = Kendaraan::all();
             $kendaraans = Kendaraan::where('nopol', 'LIKE', '%'.$keyword.'%')

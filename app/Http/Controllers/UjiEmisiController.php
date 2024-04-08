@@ -18,7 +18,7 @@ class UjiEmisiController extends Controller
      */
     public function index(Request $request) {
         $keyword = $request->keyword;
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->is_admin || auth()->user()->user_kategori != 'bengkel') {
 
             // Query uji emisi dengan join ke tabel kendaraan
             $ujiemisis = UjiEmisi::with('kendaraan')

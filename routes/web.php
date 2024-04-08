@@ -65,7 +65,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::resource('/dashboard/kendaraan', DashboardKendaraanController::class)->middleware('auth');
 
-Route::resource('/dashboard/user', UserAdminController::class)->middleware('admin');
+Route::resource('/dashboard/user', UserAdminController::class)->middleware(['auth', 'admin']);
 
 Route::resource('/dashboard/ujiemisi', UjiEmisiController::class)->middleware('auth');
 
