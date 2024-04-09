@@ -40,12 +40,15 @@
                                 @method('put')
                                 @csrf
                                 <div class="row">
-                                    <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456">    
+                                    {{-- <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}">    --}}
+                                    <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" 
+                                        value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}" 
+                                        {{ $ujiemisi->no_sertifikat ? 'readonly' : '' }}>
                                     <div class="col px-0 mt-2">
-                                        <button type="submit" class="btn btn-primary" name="print_type" value="dot_matrix">Cetak Dot Matrix<i class="fa fa-braille ms-2"></i></button>
+                                        <button type="submit" class="btn btn-success" name="print_type" value="dot_matrix">Cetak Dot Matrix<i class="fa fa-braille ms-2"></i></button>
                                     </div>
                                     <div class="col px-0 mt-2">
-                                        <button type="submit" class="btn btn-primary" name="print_type" value="printer">Cetak Printer<i class="fa fa-print ms-2"></i></button>
+                                        <button type="submit" class="btn btn-warning" name="print_type" value="printer">Cetak Printer<i class="fa fa-print ms-2"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -54,6 +57,7 @@
                 </tr>
             </tbody>
         </table>
+        <a href="/dashboard/ujiemisi" class="btn btn-primary"><i class="fa fa-long-arrow-left me-2"></i><span>Kembali ke Halaman Uji Emisi</span></a>
     </div>
 
 <script src="https://kit.fontawesome.com/467dee4ab4.js" crossorigin="anonymous"></script>

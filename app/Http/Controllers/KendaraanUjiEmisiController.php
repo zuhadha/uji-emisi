@@ -353,13 +353,23 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
-        // $pdf->Text(168,97,strtoupper("test"));
-        $pdf->Output();
-        // $pdf->Output('F', public_path('pdf/' . $fileName));
 
-        $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '.pdf';
+        $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Dot Matrix' . '.pdf';
+        $filePath = public_path('pdf/' . $fileName);
+
+        $pdf->Output('F', $filePath);
+        // Set header untuk mengarahkan pengguna ke file PDF yang baru saja dibuat
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+    
+        // Hapus file PDF setelah diunduh
+        unlink($filePath);
+
         exit;
-    }
+}
 
     public function cetakPdfPrinter() {
         $ujiemisi = Session::get('ujiemisi');
@@ -402,11 +412,21 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
-        // $pdf->Text(168,97,strtoupper("test"));
-        $pdf->Output();
-        // $pdf->Output('F', public_path('pdf/' . $fileName));
 
-        $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '.pdf';
+        $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Printer' . '.pdf';
+        $filePath = public_path('pdf/' . $fileName);
+
+        $pdf->Output('F', $filePath);
+        // Set header untuk mengarahkan pengguna ke file PDF yang baru saja dibuat
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+    
+        // Hapus file PDF setelah diunduh
+        unlink($filePath);
+
         exit;
     }
 }

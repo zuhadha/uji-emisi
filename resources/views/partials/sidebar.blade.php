@@ -20,6 +20,22 @@
         </h6>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
+                <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
+                    aria-expanded="false" aria-controls="pages">
+                    <i class="fa fa-cube pe-2"></i>
+                    Uji Emisi
+                </a>
+                <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a href="/dashboard/ujiemisi" class="sidebar-link">Hasil Uji</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/dashboard/ujiemisi/create" class="sidebar-link">Tambah Uji</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
                 @can('admin')
                 <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
                     aria-expanded="false" aria-controls="dashboard">

@@ -43,9 +43,6 @@
         </form>
     </div>
 
-
-
-
     <div class="col-11">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -64,20 +61,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                            {{-- @foreach($ujiemisis as $ujiemisi)
-                                <tr>
-                                    <td class="text-center">{{ ($ujiemisis->currentPage() - 1) * $ujiemisis->perPage() + $loop->iteration }}</td>
-                                    <td>{{ $ujiemisi->nopol }}</td>
-                                    <td>{{ $ujiemisi->kendaraan->merk }} {{ $ujiemisi->kendaraan->tipe }} {{ $ujiemisi->kendaraan->tahun }}</td>
-                                    <td>{{ $ujiemisi->tanggal_uji }}</td>
-                                    <td>{{ $ujiemisi->odometer }}</td>
-                                    <td>{{ $ujiemisi->co }}/{{ $ujiemisi->hc }}/{{ $ujiemisi->opasitas }}</td>
-                                    <td><a href="#" style="text-decoration: underline;">{{ $ujiemisi->no_sertifikat ?? "kok gaada?" }}</a></td>
-                                    <td>
-                                        <a href="/dashboard/ujiemisi/{{ $ujiemisi->id }}/edit" class="badge bg-primary"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach --}}
                             @foreach($ujiemisis as $ujiemisi)
                                 <tr>
                                     <td class="text-center">{{ ($ujiemisis->currentPage() - 1) * $ujiemisis->perPage() + $loop->iteration }}</td>
@@ -86,7 +69,7 @@
                                     <td>{{ $ujiemisi->tanggal_uji }}</td>
                                     <td>{{ $ujiemisi->odometer }}</td>
                                     <td>{{ $ujiemisi->co }}/{{ $ujiemisi->hc }}/{{ $ujiemisi->opasitas }}</td>
-                                    <td><a href="#" style="text-decoration: underline;">{{ $ujiemisi->no_sertifikat ?? "kok gaada?" }}</a></td>
+                                    <td><a href="/dashboard/ujiemisi/input-sertif/{{ $ujiemisi->id }}/input-nomor" style="text-decoration: underline;">{{ $ujiemisi->no_sertifikat }}</a></td>
                                     <td>
                                         <a href="/dashboard/ujiemisi/{{ $ujiemisi->id }}/edit" class="badge bg-primary action-btn"><i class="fa fa-pencil"></i></a>
                                         <form action="/dashboard/ujiemisi/{{ $ujiemisi->id }}" method="post" class="d-inline">
