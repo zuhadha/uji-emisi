@@ -14,7 +14,7 @@
                     <div class="mb-3 row">
                         <label for="nopol" class="col-sm-4 col-form-label">No Polisi<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nopol" name="nopol" required disabled value="{{ old('nopol', $ujiemisi->kendaraan->nopol) }}">
+                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nopol" name="nopol" required readonly value="{{ old('nopol', $ujiemisi->kendaraan->nopol) }}">
                             @error('nopol')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -25,7 +25,7 @@
                     <div class="mb-3 row">
                         <label for="merk" class="col-sm-4 col-form-label">Merk<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" required disabled value="{{ old('merk', $ujiemisi->kendaraan->merk) }}">
+                            <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" required readonly value="{{ old('merk', $ujiemisi->kendaraan->merk) }}">
                             @error('merk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -37,7 +37,7 @@
                     <div class="mb-3 row">
                       <label for="tipe" class="col-sm-4 col-form-label">Tipe<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
-                          <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" required disabled value="{{ old('tipe', $ujiemisi->kendaraan->tipe) }}">
+                          <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" required readonly value="{{ old('tipe', $ujiemisi->kendaraan->tipe) }}">
                           @error('tipe')
                               <div class="invalid-feedback">
                                   {{ $message }}
@@ -49,7 +49,7 @@
                     <div class="mb-3 row">
                       <label for="tahun" class="col-sm-4 col-form-label">Tahun<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
-                          <input type="number" class="form-control @error('tahun') is-invalid @enderror" id="tahun" name="tahun" required disabled value="{{ old('tahun', $ujiemisi->kendaraan->tahun) }}">
+                          <input type="number" class="form-control @error('tahun') is-invalid @enderror" id="tahun" name="tahun" required readonly value="{{ old('tahun', $ujiemisi->kendaraan->tahun) }}">
                           @error('tahun')
                               <div class="invalid-feedback">
                                   {{ $message }}
@@ -66,7 +66,7 @@
                         <label for="cc" class="col-sm-4 col-form-label">CC<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
 
-                            <input type="number" class="form-control @error('cc') is-invalid @enderror" id="cc" name="cc" required disabled value="{{ old('cc', $ujiemisi->kendaraan->cc) }}">
+                            <input type="number" class="form-control @error('cc') is-invalid @enderror" id="cc" name="cc" required readonly value="{{ old('cc', $ujiemisi->kendaraan->cc) }}">
                             @error('cc')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -78,7 +78,7 @@
                     <div class="mb-3 row">
                         <label for="no_rangka" class="col-sm-4 col-form-label">No Rangka (VIN)</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" id="no_rangka" name="no_rangka" disabled value="{{ old('no_rangka', $ujiemisi->kendaraan->no_rangka) }}">
+                            <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" id="no_rangka" name="no_rangka" readonly value="{{ old('no_rangka', $ujiemisi->kendaraan->no_rangka) }}">
                             @error('no_rangka')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -93,7 +93,7 @@
                     <div class="mb-3 row">
                         <label for="no_mesin" class="col-sm-4 col-form-label" focus>No Mesin</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" id="no_mesin" name="no_mesin" disabled value="{{ old('no_mesin', $ujiemisi->kendaraan->no_mesin) }}">
+                            <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" id="no_mesin" name="no_mesin" readonly value="{{ old('no_mesin', $ujiemisi->kendaraan->no_mesin) }}">
                             @error('no_mesin')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="hc" class="col-sm-4 col-form-label">HC (ppm)<span class="text-danger">*</span></label>
+                      <label for="hc" class="col-sm-4 col-form-label">HC (PPM)<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
                           <input type="text" class="form-control @error('hc') is-invalid @enderror" id="hc" name="hc" required value="{{ old('hc', $ujiemisi->hc) }}">
                           @error('hc')
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (putaran)</label>
+                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (PPM)</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('putaran') is-invalid @enderror" id="putaran" name="putaran" value="{{ old('putaran', $ujiemisi->putaran) }}">
                             @error('putaran')
@@ -252,7 +252,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="temperatur" class="col-sm-4 col-form-label">Temperatur (C)</label>
+                      <label for="temperatur" class="col-sm-4 col-form-label">Suhu Oli (<sup>o</sup>C)</label>
                       <div class="col-sm-8">
                           <input type="text" class="form-control @error('temperatur') is-invalid @enderror" id="temperatur" name="temperatur" value="{{ old('temperatur', $ujiemisi->temperatur) }}">
                           @error('temperatur')
@@ -266,7 +266,7 @@
                     <div class="mb-3 row">
                       <label for="lambda" class="col-sm-4 col-form-label">Lambda</label>
                       <div class="col-sm-8">
-                          <input type="number" class="form-control @error('lambda') is-invalid @enderror" id="lambda" name="lambda" value="{{ old('lambda', $ujiemisi->lambda) }}">
+                          <input type="text" class="form-control @error('lambda') is-invalid @enderror" id="lambda" name="lambda" value="{{ old('lambda', $ujiemisi->lambda) }}">
                           @error('lambda')
                               <div class="invalid-feedback">
                                   {{ $message }}

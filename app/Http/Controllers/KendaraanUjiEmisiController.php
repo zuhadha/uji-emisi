@@ -113,20 +113,46 @@ class KendaraanUjiEmisiController extends Controller
             'no_mesin' => '',
             'kendaraan_kategori' => 'required',
             'bahan_bakar' => 'required',
-            'odometer' => 'required', // tambahkan validasi uji emisi juga di sini
-            'co' =>'',
-            'hc' => 'integer',
-            'opasitas' => 'integer',
-            'co2' => '',
-            'co_koreksi' => '',
-            'o2' => '',
-            'putaran' => '',
-            'temperatur' => '',
-            'lambda' => '',
+            'odometer' => 'required',
+            'co' => 'numeric|between:0,9.99',
+            'hc' => 'integer|between:0,9999',
+            'opasitas' => 'numeric|between:0,9.99',
+            'co2' => 'numeric|between:0,19.9',
+            'co_koreksi' => 'numeric|between:0,9.99',
+            'o2' => 'numeric|between:0,25',
+            'putaran' => 'integer|between:300,9990',
+            'temperatur' => 'numeric|between:10,150',
+            'lambda' => 'numeric|between:0.5,5',
         ], [
+            'nopol.required' => 'Nomor Polisi harus diisi',
+            'merk.required' => 'Merk kendaraan harus diisi',
+            'tipe.required' => 'Tipe kendaraan harus diisi',
+            'tahun.required' => 'Tahun kendaraan harus diisi',
+            'tahun.gt' => 'Tahun kendaraan harus lebih besar dari 1900',
+            'cc.required' => 'Kapasitas mesin (CC) harus diisi',
+            'cc.gt' => 'Kapasitas mesin (CC) harus lebih besar dari 100',
+            'kendaraan_kategori.required' => 'Kategori kendaraan harus diisi',
+            'bahan_bakar.required' => 'Bahan bakar kendaraan harus diisi',
+            'odometer.required' => 'Odometer kendaraan harus diisi',
+            'co.numeric' => 'Nilai CO harus berupa angka',
+            'co.between' => 'Nilai CO harus antara 0 sampai 9.99',
             'hc.integer' => 'HC harus berupa bilangan bulat',
-            'opasitas.integer' => 'Opasitas harus berupa bilangan bulat'
-        ]);
+            'hc.between' => 'HC harus berada di antara 0 sampai 9999',
+            'opasitas.numeric' => 'Nilai opasitas harus berupa angka',
+            'opasitas.between' => 'Nilai opasitas harus antara 0 sampai 9.99',
+            'co2.numeric' => 'Nilai CO2 harus berupa angka',
+            'co2.between' => 'Nilai CO2 harus antara 0 sampai 19.9',
+            'co_koreksi.numeric' => 'Nilai CO koreksi harus berupa angka',
+            'co_koreksi.between' => 'Nilai CO koreksi harus antara 0 sampai 9.99',
+            'o2.numeric' => 'Nilai O2 harus berupa angka',
+            'o2.between' => 'Nilai O2 harus antara 0 sampai 25',
+            'putaran.integer' => 'Putaran mesin harus berupa bilangan bulat',
+            'putaran.between' => 'Putaran mesin harus antara 300 sampai 9990',
+            'temperatur.numeric' => 'Suhu oli harus berupa angka',
+            'temperatur.between' => 'Suhu oli harus antara 10 sampai 150',
+            'lambda.numeric' => 'Nilai Lambda harus berupa angka',
+            'lambda.between' => 'Nilai Lambda harus antara 0.5 sampai 5',
+        ]);        
 
         $kendaraan = Kendaraan::where('nopol', $validatedData['nopol'])->first();
 
@@ -147,23 +173,6 @@ class KendaraanUjiEmisiController extends Controller
         } else {
             return redirect("/dashboard/ujiemisi")->with('error', 'Kendaraan dan Uji emisi berhasil ditambah tetapi kendaraan tidak lulus uji emisi');
         }
-
-        // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}/input-nomor")->with('success', 'Kendaraan dinyatakan lulus uji emisi');
-        // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}/input-nomor")->with('success', 'Uji Emisi berhasil ditambahkan, dan kendaraan lulus uji emisi');
-
-        // dd($tanggal_uji);
-        // return view("/dashboard/ujiemisi/input-sertif", [
-        //     'ujiemisi' => $ujiemisi,
-        //     'kendaraan' => $kendaraan,
-        //     "tanggal_uji" => $tanggal,
-        // ]);
-
-
-
-        // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}")->with('success', 'Kendaraan memenuhi standard dan dinyatakan lulus uji emisi');
-        // return redirect('/dashboard/ujiemisi')->with('success', 'Kendaraan dan hasil uji emisi berhasil ditambahkan');
-        // return redirect("/dashboard/ujiemisi/input-sertif/{$ujiemisi->id}")->with('success', 'Kendaraan memenuhi standard dan dinyatakan lulus uji emisi');
-
     }
 
 

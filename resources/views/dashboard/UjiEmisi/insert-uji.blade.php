@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="hc" class="col-sm-4 col-form-label">HC (ppm)<span class="text-danger">*</span></label>
+                      <label for="hc" class="col-sm-4 col-form-label">HC (PPM)<span class="text-danger">*</span></label>
                       <div class="col-sm-8">
                           <input type="text" class="form-control @error('hc') is-invalid @enderror" id="hc" name="hc" required value="{{ old('hc') }}">
                           @error('hc')
@@ -236,7 +236,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (putaran)</label>
+                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (PPM)</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('putaran') is-invalid @enderror" id="putaran" name="putaran" value="{{ old('putaran') }}">
                             @error('putaran')
@@ -248,7 +248,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="temperatur" class="col-sm-4 col-form-label">Temperatur (C)</label>
+                      <label for="temperatur" class="col-sm-4 col-form-label">Suhu Oli (<sup>o</sup>C)</label>
                       <div class="col-sm-8">
                           <input type="text" class="form-control @error('temperatur') is-invalid @enderror" id="temperatur" name="temperatur"value="{{ old('temperatur') }}">
                           @error('temperatur')
@@ -286,33 +286,6 @@
             document.getElementById('nopol').focus();
         @endif
     </script>
-    
-    {{-- <script>
-        // pengkondisian disabled form berdasarkan input bahan bakar
-        // Mendapatkan referensi ke input radio
-        const bahanBakarInputs = document.querySelectorAll('input[name="bahan_bakar"]');
-    
-        // Mendengarkan perubahan pada input radio
-        bahanBakarInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                const bahanBakar = this.value;
-                // Periksa nilai input radio yang dipilih dan atur status disabled pada input yang sesuai
-                if (bahanBakar === 'Bensin') {
-                    document.getElementById('opasitas').disabled = true;
-                    document.getElementById('co').disabled = false;
-                    document.getElementById('hc').disabled = false;
-                } else if (bahanBakar === 'Solar') {
-                    document.getElementById('opasitas').disabled = false;
-                    document.getElementById('co').disabled = true;
-                    document.getElementById('hc').disabled = true;
-                } else if (bahanBakar === 'Gas') {
-                    document.getElementById('opasitas').disabled = false;
-                    document.getElementById('co').disabled = false;
-                    document.getElementById('hc').disabled = false;
-                }
-            });
-        });
-    </script> --}}
 
     <script>
         // Mendapatkan referensi ke input radio
