@@ -20,21 +20,7 @@
         </h6>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
-                    aria-expanded="false" aria-controls="pages">
-                    <i class="fa fa-cube pe-2"></i>
-                    Uji Emisi
-                </a>
-                <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="/dashboard/ujiemisi" class="sidebar-link">Hasil Uji</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/dashboard/ujiemisi/create" class="sidebar-link">Tambah Uji</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-item">
+                @can('admin')
                 <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
                     aria-expanded="false" aria-controls="dashboard">
                     <i class="fa fa-car pe-2"></i>
@@ -44,13 +30,33 @@
                     <li class="sidebar-item">
                         <a href="/dashboard/kendaraan" class="sidebar-link">List Kendaraan</a>
                     </li>
-                    @can('admin')
                     <li class="sidebar-item">
                         <a href="/dashboard/kendaraan/create" class="sidebar-link">Tambah Kendaraan</a>
                     </li>
-                    @endcan
                 </ul>
+                @elsecan('dinas')
+                <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
+                    aria-expanded="false" aria-controls="dashboard">
+                    <i class="fa fa-car pe-2"></i>
+                    Kendaraan
+                </a>
+                <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a href="/dashboard/kendaraan" class="sidebar-link">List Kendaraan</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/dashboard/kendaraan/create" class="sidebar-link">Tambah Kendaraan</a>
+                    </li>
+                </ul>
+                @else
+                <a href="/dashboard/kendaraan" class="sidebar-link">
+                    <i class="fa fa-car pe-2"></i>
+                    List Kendaraan
+                </a>
+                @endcan
             </li>
+            
+            
 
             <li class="sidebar-item">
                 <form action="/logout" method="post" id="logout-form">
