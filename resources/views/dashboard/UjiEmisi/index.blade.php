@@ -25,11 +25,29 @@
             <a href="/dashboard/ujiemisi/create" class="btn add-button mb-3">Insert Hasil Uji</a>
             
         </div>
-        <div class="col-lg-4  d-flex justify-content-end">
+        {{-- <div class="col-lg-4  d-flex justify-content-end">
             <form action="{{ route('export') }}" method="GET">
                 @csrf
-                <button type="submit" class="btn btn-primary mb-3">Export</button>
+                <button type="submit" class="btn btn-success mb-3">Export<i class="fa fa-table ms-2"></i></button>
             </form>            
+        </div> --}}
+
+        <div class="col-lg-4 d-flex justify-content-end">
+            <form id="exportForm" action="{{ route('export') }}" method="GET">
+                @csrf
+                <input type="hidden" id="selectedButtonId" name="selectedButtonId">
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle mb-3" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-table me-2"></i> Export Data
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+                        <li><button id="allDataBtn" class="dropdown-item" type="button" onclick="exportData('all')">Seluruh Data</button></li>
+                        <li><button id="lastYearBtn" class="dropdown-item" type="button" onclick="exportData('last_year')">Satu Tahun Terakhir</button></li>
+                        <li><button id="lastMonthBtn" class="dropdown-item" type="button" onclick="exportData('last_month')">Satu Bulan Terakhir</button></li>
+                        <li><a id="customRangeBtn" class="dropdown-item" style="text-decoration: none" href="/dashboard/export/custom">Kustom Rentang Waktu</a></li>
+                    </ul>
+                </div>
+            </form>
         </div>
         <form class="col-lg-3 d-flex justify-content-end" method="GET" action="/dashboard/ujiemisi">
             <div class="row">
@@ -98,6 +116,42 @@
 
 <script src="https://kit.fontawesome.com/467dee4ab4.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Function to handle export based on selected option
+    function exportData(range) {
+        // Set the value of the 'range' input field
+        document.getElementById('exportRange').value = range;
+        // Submit the form
+        document.getElementById('exportForm').submit();
+    }
+</script>
+
+<script>
+    function exportData(range) {
+        // Menyimpan id tombol yang dipilih ke dalam variabel buttonId
+        let buttonId;
+        switch (range) {
+            case 'last_year':
+                buttonId = 'lastYearBtn';
+                break;
+            case 'last_month':
+                buttonId = 'lastMonthBtn';
+                break;
+            case 'all':
+                buttonId = 'allDataBtn';
+                break;
+            default:
+                buttonId = 'customRangeBtn';
+        }
+
+        // Set nilai input dengan id tombol yang dipilih
+        document.getElementById('selectedButtonId').value = buttonId;
+
+        // Submit form
+        document.getElementById('exportForm').submit();
+    }
+</script>
+
 
 
 @endsection

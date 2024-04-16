@@ -47,14 +47,42 @@ class ExportController extends Controller
     //     // Return the file content as a response
     //     return response($fileContent, 200, $headers);
     // }
-    public function export()
+    public function export(Request $request)
     {
-        // Query uji emisi dengan join ke tabel kendaraan
-        $ujiemisis = UjiEmisi::with('kendaraan')
-            ->join('kendaraans', 'uji_emisis.kendaraan_id', '=', 'kendaraans.id')
-            ->select('uji_emisis.*') // Pilih kolom dari uji_emisis
-            ->get();
-    
+        // Mendapatkan id tombol yang dipilih
+        $selectedButtonId = $request->input('selectedButtonId');
+        $startDate = $request->input('start_date');
+        $endDate = date('Y-m-d', strtotime($request->input('end_date') . ' +1 day')); // ditambah satu sehingga masuk ketika menggunakan query between 
+        // Get the user's category
+        $userCategory = auth()->user()->user_kategori;
+        
+        // Inisialisasi query
+        $query = UjiEmisi::with('kendaraan')
+                    ->join('kendaraans', 'uji_emisis.kendaraan_id', '=', 'kendaraans.id')
+                    ->select('uji_emisis.*'); // Pilih kolom dari uji_emisis
+
+        // Pengkondisian berdasarkan tombol yang dipilih
+        if ($selectedButtonId === 'lastYearBtn') {
+            // Query untuk satu tahun terakhir
+            $query->where('uji_emisis.tanggal_uji', '>=', now()->subYear());
+        } elseif ($selectedButtonId === 'lastMonthBtn') {
+            // Query untuk satu bulan terakhir
+            $query->where('uji_emisis.tanggal_uji', '>=', now()->subMonth());
+        } elseif ($selectedButtonId === 'customRangeBtn') {
+            // Query untuk rentang waktu kustom
+            $query->whereBetween('uji_emisis.tanggal_uji', [$startDate, $endDate]);
+        }
+
+        if (auth()->user()->is_admin || $userCategory != 'bengkel') {
+            // For admin or users other than 'bengkel', no additional condition needed
+        } else {
+            // For users with category 'bengkel', filter data based on user's ID
+            $query->where('uji_emisis.user_id', auth()->user()->id);
+        }
+
+        // Execute the query
+        $ujiemisis = $query->get();
+
         // Create a new Spreadsheet object
         $spreadsheet = new Spreadsheet();
     
@@ -105,10 +133,27 @@ class ExportController extends Controller
         // Create a writer object for Xlsx format
         $writer = new Xlsx($spreadsheet);
     
+        // Define the default file name
+        $fileName = 'ujiemisi';
+
+        // Modify file name based on the export type
+        if ($selectedButtonId === 'customRangeBtn') {
+            // Custom range: Append start date and end date to the file name
+            $startDate = date('dmY', strtotime($request->input('start_date')));
+            $endDate = date('dmY', strtotime($request->input('end_date')));
+            $fileName .= '_'.$startDate.'_'.$endDate;
+        } else {
+            // Other export types: Append today's date to the file name
+            $fileName .= '_'.now()->format('dmY');
+        }
+
+        // Add file extension
+        $fileName .= '.xlsx';
+
         // Set headers for file download
         $headers = [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition' => 'attachment;filename="ujiemisi.xlsx"',
+            'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
             'Cache-Control' => 'max-age=0'
         ];
     
@@ -124,6 +169,10 @@ class ExportController extends Controller
     
         // Return the file content as a response
         return response($fileContent, 200, $headers);
+    }
+    public function exportCustom()
+    {
+        return view('dashboard.UjiEmisi.custom-export');
     }
 }
 

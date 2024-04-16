@@ -86,3 +86,5 @@ Route::get('/dashboard/cetak/dotmatrix', [KendaraanUjiEmisiController::class, 'c
 Route::get('/dashboard/cetak/printer', [KendaraanUjiEmisiController::class, 'cetakPdfPrinter']);
 
 Route::get('/export', [ExportController::class, 'export'])->name('export');
+Route::get('/dashboard/export/custom', [ExportController::class, 'exportCustom'])->name('custom_export');
+Route::get('/dashboard/export/custom/input', [ExportController::class, 'exportCustomInput'])->name('custom_export_input');
