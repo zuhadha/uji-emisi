@@ -104,35 +104,28 @@ class KendaraanUjiEmisiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nopol' => 'required',
-            'merk' => 'required',
-            'tipe' => 'required',
-            'tahun' => 'required|gt:1900',
-            'cc' => 'required|gt:100',
+            'nopol' => '',
+            'merk' => '',
+            'tipe' => '',
+            'tahun' => '|gt:1900',
+            'cc' => '|gt:100',
             'no_rangka' => '',
             'no_mesin' => '',
-            'kendaraan_kategori' => 'required',
-            'bahan_bakar' => 'required',
+            'kendaraan_kategori' => '',
+            'bahan_bakar' => '',
             'odometer' => 'required',
             'co' => 'numeric|between:0,9.99',
             'hc' => 'integer|between:0,9999',
             'opasitas' => 'numeric|between:0,9.99',
-            'co2' => 'numeric|between:0,19.9',
-            'co_koreksi' => 'numeric|between:0,9.99',
-            'o2' => 'numeric|between:0,25',
-            'putaran' => 'integer|between:300,9990',
-            'temperatur' => 'numeric|between:10,150',
-            'lambda' => 'numeric|between:0.5,5',
+            'co2' => 'nullable|numeric|between:0,19.9',
+            'co_koreksi' => 'nullable|numeric|between:0,9.99',
+            'o2' => 'nullable|numeric|between:0,25',
+            'putaran' => 'nullable|integer|between:300,9990',
+            'temperatur' => 'nullable|numeric|between:10,150',
+            'lambda' => 'nullable|numeric|between:0.5,5',
         ], [
-            'nopol.required' => 'Nomor Polisi harus diisi',
-            'merk.required' => 'Merk kendaraan harus diisi',
-            'tipe.required' => 'Tipe kendaraan harus diisi',
-            'tahun.required' => 'Tahun kendaraan harus diisi',
             'tahun.gt' => 'Tahun kendaraan harus lebih besar dari 1900',
-            'cc.required' => 'Kapasitas mesin (CC) harus diisi',
             'cc.gt' => 'Kapasitas mesin (CC) harus lebih besar dari 100',
-            'kendaraan_kategori.required' => 'Kategori kendaraan harus diisi',
-            'bahan_bakar.required' => 'Bahan bakar kendaraan harus diisi',
             'odometer.required' => 'Odometer kendaraan harus diisi',
             'co.numeric' => 'Nilai CO harus berupa angka',
             'co.between' => 'Nilai CO harus antara 0 sampai 9.99',
@@ -152,7 +145,7 @@ class KendaraanUjiEmisiController extends Controller
             'temperatur.between' => 'Suhu oli harus antara 10 sampai 150',
             'lambda.numeric' => 'Nilai Lambda harus berupa angka',
             'lambda.between' => 'Nilai Lambda harus antara 0.5 sampai 5',
-        ]);        
+        ]);  
 
         $kendaraan = Kendaraan::where('nopol', $validatedData['nopol'])->first();
 
