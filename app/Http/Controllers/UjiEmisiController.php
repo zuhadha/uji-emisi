@@ -58,15 +58,6 @@ class UjiEmisiController extends Controller
         ]);
     }
 
-
-    // public function show(UjiEmisi $ujiemisi)
-    // {
-    //     return view('dashboard.ujiemisi.input-sertif', [
-    //         "bengkel_name" => auth()->user()->bengkel_name,
-    //         "ujiemisi" => $ujiemisi
-    //     ]);
-    // }
-
     public function showInputSertifikat(UjiEmisi $ujiemisi, $ujiemisi_id)
     {
         $ujiemisiLulus = UjiEmisi::findOrFail($ujiemisi_id);
@@ -74,24 +65,6 @@ class UjiEmisiController extends Controller
             "bengkel_name" => auth()->user()->bengkel_name,
             "ujiemisi" => $ujiemisiLulus
         ]);
-    }
-
-    public function inputSertifikat(Request $request, UjiEmisi $ujiemisi) // ini gak kepake.
-    {
-        $validatedData = $request->validate([
-            'no_sertifikat' => 'required|unique:ujiemisi',
-        ], [
-            'no_sertifikat.required' => 'Nomor sertifikat harus diisi.',
-            'no_sertifikat.unique' => 'Nomor sertifikat sudah digunakan.',
-        ]);
-
-        dd($request);
-
-        UjiEmisi::where('id', $ujiemisi->id)->update($validatedData);
-
-        $ujiemisi->update($validatedData);
-
-        return redirect('/dashboard/ujiemisi')->with('success', 'Uji Emisi berhasil ditambahkan, dan kendaraan lulus uji emisi');
     }
 
     /**
