@@ -7,6 +7,7 @@ use App\Models\UjiEmisi;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 // use Illuminate\Support\Facades\Session;
@@ -70,7 +71,13 @@ class KendaraanUjiEmisiController extends Controller
         // $ujiemisi = UjiEmisi::findOrFail($ujiemisi_id);
         $ujiemisi = UjiEmisi::findOrFail($ujiemisi_id);
         $validatedData = $request->validate([
-            'no_sertifikat' => 'required',
+            'no_sertifikat' => [
+                'required',
+                Rule::unique('uji_emisis')->ignore($ujiemisi->id),
+            ],
+        ], [
+            'no_sertifikat.required' => 'Nomor sertifikat harus diisi.',
+            'no_sertifikat.unique' => 'Nomor sertifikat sudah digunakan.',
         ]);
 
         $ujiemisi->update($validatedData);
@@ -357,18 +364,12 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
 
         $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Dot Matrix' . '.pdf';
-        $filePath = public_path('pdf/' . $fileName);
 
-        $pdf->Output('F', $filePath);
-        // Set header untuk mengarahkan pengguna ke file PDF yang baru saja dibuat
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        header('Content-Length: ' . filesize($filePath));
-        readfile($filePath);
-    
-        // Hapus file PDF setelah diunduh
-        unlink($filePath);
+
+        $pdf->Output('D', $fileName); 
 
         exit;
 }
@@ -416,18 +417,12 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
 
         $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Printer' . '.pdf';
-        $filePath = public_path('pdf/' . $fileName);
 
-        $pdf->Output('F', $filePath);
-        // Set header untuk mengarahkan pengguna ke file PDF yang baru saja dibuat
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        header('Content-Length: ' . filesize($filePath));
-        readfile($filePath);
-    
-        // Hapus file PDF setelah diunduh
-        unlink($filePath);
+
+        $pdf->Output('D', $fileName); 
 
         exit;
     }

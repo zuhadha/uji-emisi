@@ -41,9 +41,14 @@
                                 @csrf
                                 <div class="row">
                                     {{-- <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}">    --}}
-                                    <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" 
+                                    <input type="text" class="px-2 @error('no_sertifikat') is-invalid @enderror form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" 
                                         value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}" 
                                         {{ $ujiemisi->no_sertifikat ? 'readonly' : '' }}>
+                                        @error('no_sertifikat')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     <div class="col px-0 mt-2">
                                         <button type="submit" class="btn btn-success" name="print_type" value="dot_matrix">Cetak Dot Matrix<i class="fa fa-braille ms-2"></i></button>
                                     </div>
@@ -62,7 +67,6 @@
 
 <script src="https://kit.fontawesome.com/467dee4ab4.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
 
 @endsection
     

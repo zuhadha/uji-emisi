@@ -79,7 +79,10 @@ class UjiEmisiController extends Controller
     public function inputSertifikat(Request $request, UjiEmisi $ujiemisi) // ini gak kepake.
     {
         $validatedData = $request->validate([
-            'no_sertifikat' => 'required',
+            'no_sertifikat' => 'required|unique:ujiemisi',
+        ], [
+            'no_sertifikat.required' => 'Nomor sertifikat harus diisi.',
+            'no_sertifikat.unique' => 'Nomor sertifikat sudah digunakan.',
         ]);
 
         dd($request);
@@ -246,9 +249,6 @@ class UjiEmisiController extends Controller
             'lambda.numeric' => 'Nilai Lambda harus berupa angka',
             'lambda.between' => 'Nilai Lambda harus antara 0.5 sampai 5',
         ]);  
-
-        // $idKendaraan = session()->get('idKendaraan');
-        // dd($ujiemisi);
 
         $validatedData['user_id'] = auth()->user()->id;
         UjiEmisi::where('id', $ujiemisi->id)->update($validatedData);
