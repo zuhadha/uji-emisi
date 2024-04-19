@@ -75,8 +75,8 @@ class KendaraanUjiEmisiController extends Controller
                 Rule::unique('uji_emisis'),
             ],
         ], [
-            'no_sertifikat.required' => 'Nomor serti tanda lulus harus diisi.',
-            'no_sertifikat.unique' => 'Nomor serti tanda lulus digunakan.',
+            'no_sertifikat.required' => 'Nomor seri tanda lulus harus diisi.',
+            'no_sertifikat.unique' => 'Nomor seri tanda lulus digunakan.',
         ]);
 
         $ujiemisi->update($validatedData);

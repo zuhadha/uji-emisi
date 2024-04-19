@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (PPM)</label>
+                        <label for="putaran" class="col-sm-4 col-form-label">Putaran (RPM)</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('putaran') is-invalid @enderror" id="putaran" name="putaran" value="{{ old('putaran', $ujiemisi->putaran) }}">
                             @error('putaran')
