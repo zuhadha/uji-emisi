@@ -38,15 +38,14 @@
 
                         <td>
                             <div style="display: flex;">
-                                <a href="/dashboard/user/{{ $u->id }}/edit" class="badge bg-primary px-2 me-1 py-0 py-2"><i class="fa fa-pencil"></i></a>
+                                <a href="/dashboard/user/{{ $u->id }}/edit" class="badge bg-primary px-2 me-1 py-0 py-2" title="Edit Informasi Pengguna"><i class="fa fa-pencil"></i></a>
                                 <form action="/dashboard/user/{{ $u->id }}" method="post" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class=" badge bg-danger border-0 action-btn px-2 py-2" onclick="return confirm('Hapus user dengan username {!! $u['username'] !!} ?')"><i class="fa fa-trash"></i></button>
+                                    <button class=" badge bg-danger border-0 action-btn px-2 py-2" title="Hapus Pengguna" onclick="return confirm('Hapus user dengan username {!! $u['username'] !!} ?')"><i class="fa fa-trash"></i></button>
                                 </form>
                             </div>
                         </td>
-                        
                     </tr>
                 @endforeach
             </tbody>

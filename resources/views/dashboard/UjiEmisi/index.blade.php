@@ -10,13 +10,11 @@
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show col-lg-11" role="alert" >
         {{ session('success') }}
-        {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}
     </div>
     @endif
     @if (session()->has('error'))
     <div class="alert alert-danger alert-dismissible fade show col-lg-11" role="alert" >
         {{ session('error') }}
-        {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}
     </div>
     @endif
     
@@ -25,12 +23,6 @@
             <a href="/dashboard/ujiemisi/create" class="btn add-button mb-3">Insert Hasil Uji</a>
             
         </div>
-        {{-- <div class="col-lg-4  d-flex justify-content-end">
-            <form action="{{ route('export') }}" method="GET">
-                @csrf
-                <button type="submit" class="btn btn-success mb-3">Export<i class="fa fa-table ms-2"></i></button>
-            </form>            
-        </div> --}}
 
         <div class="col-lg-4 d-flex justify-content-end">
             <form id="exportForm" action="{{ route('export') }}" method="GET">
@@ -87,13 +79,13 @@
                                     <td>{{ $ujiemisi->tanggal_uji }}</td>
                                     <td>{{ $ujiemisi->odometer }}</td>
                                     <td>{{ $ujiemisi->co }}/{{ $ujiemisi->hc }}/{{ $ujiemisi->opasitas }}</td>
-                                    <td><a href="/dashboard/ujiemisi/input-sertif/{{ $ujiemisi->id }}/input-nomor" style="text-decoration: underline;">{{ $ujiemisi->no_sertifikat }}</a></td>
+                                    <td><a href="/dashboard/ujiemisi/input-sertif/{{ $ujiemisi->id }}/input-nomor" style="text-decoration: underline;" title="Cetak Sertifikat">{{ $ujiemisi->no_sertifikat }}</a></td>
                                     <td>
-                                        <a href="/dashboard/ujiemisi/{{ $ujiemisi->id }}/edit" class="badge bg-primary action-btn"><i class="fa fa-pencil"></i></a>
+                                        <a href="/dashboard/ujiemisi/{{ $ujiemisi->id }}/edit" class="badge bg-primary action-btn" title="Edit Hasil Uji Emisi"><i class="fa fa-pencil"></i></a>
                                         <form action="/dashboard/ujiemisi/{{ $ujiemisi->id }}" method="post" class="d-inline">
                                             @method('delete')
                                             @csrf
-                                            <button class="badge bg-danger border-0 action-btn" onclick="return confirm('Hapus hasil uji?')"><i class="fa fa-trash"></i></button>
+                                            <button class="badge bg-danger border-0 action-btn" title="Hapus Hasil Uji Emisi" onclick="return confirm('Hapus hasil uji?')"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

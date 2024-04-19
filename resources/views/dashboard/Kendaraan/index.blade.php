@@ -68,13 +68,13 @@
                         <td>{{ $k->user->bengkel_name }}</td>
                         @endcan
                         <td>
-                            <a href="/dashboard/kendaraan/{{ $k->id }}" class="badge bg-secondary action-btn"><i class="fa fa-file-lines"></i></a>
-                            <a href="/dashboard/kendaraan/{{ $k->id }}/edit" class="badge bg-primary action-btn"><i class="fa fa-pencil"></i></a>
-                            <a href="/dashboard/ujiemisi/insert/create/{{ $k->id }}" class="badge bg-success action-btn"><i class="fa fa-wrench"></i></a>
+                            <a href="/dashboard/kendaraan/{{ $k->id }}" class="badge bg-secondary action-btn" title="Lihat Detail Kendaraan" ><i class="fa fa-file-lines"></i></a>
+                            <a href="/dashboard/kendaraan/{{ $k->id }}/edit" class="badge bg-primary action-btn" title="Edit Data Kendaraan" ><i class="fa fa-pencil"></i></a>
+                            <a href="/dashboard/ujiemisi/insert/create/{{ $k->id }}" class="badge bg-success action-btn" title="Tambah Uji Emisi" ><i class="fa fa-wrench"></i></a>
                             <form action="/dashboard/kendaraan/{{ $k->id }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="badge bg-danger border-0 action-btn" onclick="return confirm('Hapus kendaraan dengan nomor polisi {!! $k['nopol'] !!} ?')"><i class="fa fa-trash"></i></button>
+                                <button class="badge bg-danger border-0 action-btn" title="Hapus Kendaraan"  onclick="return confirm('Hapus kendaraan dengan nomor polisi {!! $k['nopol'] !!} ?')"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
