@@ -72,11 +72,11 @@ class KendaraanUjiEmisiController extends Controller
         $validatedData = $request->validate([
             'no_sertifikat' => [
                 'required',
-                Rule::unique('uji_emisis')->ignore($ujiemisi->id),
+                Rule::unique('uji_emisis'),
             ],
         ], [
-            'no_sertifikat.required' => 'Nomor sertifikat harus diisi.',
-            'no_sertifikat.unique' => 'Nomor sertifikat sudah digunakan.',
+            'no_sertifikat.required' => 'Nomor serti tanda lulus harus diisi.',
+            'no_sertifikat.unique' => 'Nomor serti tanda lulus digunakan.',
         ]);
 
         $ujiemisi->update($validatedData);
