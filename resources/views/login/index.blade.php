@@ -15,16 +15,20 @@
     <div class="container-fluid">
         <img src="login_ilustration.jpg" alt="" class="background-image">
         <div class="row justify-content-center align-items-center h-100">
-            <form class="login-form" action="/login" method="post">
+            <form class="login-form pb-2" action="/login" method="post">
                 @csrf
-                <h4 class="text-center">Login</h4>
+                <div class="text-center mb-2">
+                    <img src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-width: 200px;">
+                </div>
+
+                <h4 class="text-center mb-2">Login</h4>
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="username" class="form-label mb-0">Username</label>
                     <input type="text" name="username" class="form-control" id="username" placeholder="Username"
                         autofocus required>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                <div class="mb-2">
+                    <label for="password" class="form-label mb-0">Password</label>
                     <div class="input-group">
                         <input type="password" name="password" class="form-control" id="password"
                             placeholder="Password" required>
@@ -36,6 +40,10 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
+                <div class="text-center my-3">
+                    <p>Supported by:</p>
+                    <img src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-width: 60px;">
+                </div>
             </form>
         </div>
     </div>
