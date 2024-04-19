@@ -60,7 +60,6 @@ class KendaraanUjiEmisiController extends Controller
 
 
         return view('dashboard.UjiEmisi.input-sertif', [
-            "bengkel_name" => auth()->user()->bengkel_name,
             "ujiemisi" => $ujiemisiLulus,
             "tanggal_uji" => $tanggal,
         ]);
@@ -356,7 +355,7 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*7)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
         $pdf->Text($column,$row+($space_per_row*8),strtoupper($ujiemisi->odometer));
         $pdf->Text($column,$row+($space_per_row*9),strtoupper($ujiemisi->kendaraan->user->bengkel_name));
-        $pdf->Text($column,$row+($space_per_row*10)+0.5,strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+0.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->Text($column,$row+($space_per_row*10)+0.5,strtoupper($ujiemisi->user->jalan)); $pdf->Text($table-26,$row+($space_per_row*11)+0.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
 
         $pdf->SetFont('courier', 'B', 9);
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
@@ -410,7 +409,7 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->Text($column,$row+($space_per_row*7)+($little_space*4)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
         $pdf->Text($column,$row+($space_per_row*8)+($little_space*5)-0.5,strtoupper($ujiemisi->odometer));
         $pdf->Text($column,$row+($space_per_row*9)+($little_space*5)-0.5,strtoupper($ujiemisi->kendaraan->user->bengkel_name));
-        $pdf->Text($column,$row+($space_per_row*10)+($little_space*4),strtoupper($alamat)); $pdf->Text($table-26,$row+($space_per_row*11)+1,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->Text($column,$row+($space_per_row*10)+($little_space*4),strtoupper($ujiemisi->user->jalan)); $pdf->Text($table-26,$row+($space_per_row*11)+1,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
         $pdf->SetFont('courier','B',9);
         $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
         $pdf->SetFont('courier','',9);
@@ -421,7 +420,7 @@ class KendaraanUjiEmisiController extends Controller
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        
+
         $pdf->Output('I', $fileName);  
 
         exit;
