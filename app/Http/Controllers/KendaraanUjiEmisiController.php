@@ -76,7 +76,7 @@ class KendaraanUjiEmisiController extends Controller
             ],
         ], [
             'no_sertifikat.required' => 'Nomor seri tanda lulus harus diisi.',
-            'no_sertifikat.unique' => 'Nomor seri tanda lulus digunakan.',
+            'no_sertifikat.unique' => 'Nomor seri tanda lulus telah digunakan.',
         ]);
 
         $ujiemisi->update($validatedData);
