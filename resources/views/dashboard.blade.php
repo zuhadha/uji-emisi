@@ -4,9 +4,9 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Statistik Hasil Uji Emisi</h1>
         <div>
-            <img class="mx-1" src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-height: 50px;">
-            <img class="mx-1" src="/img/logo_dishub.png" alt="Logo Asbekindo" style="max-height: 50px;">
             <img class="mx-1" src="/img/logo_dlh.png" alt="Logo Asbekindo" style="max-height: 50px;">
+            <img class="mx-1" src="/img/logo_dishub.png" alt="Logo Asbekindo" style="max-height: 50px;">
+            <img class="mx-1" src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-height: 50px;">
         </div>
     </div>
 

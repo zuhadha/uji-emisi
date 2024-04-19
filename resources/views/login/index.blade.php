@@ -42,9 +42,9 @@
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
                 <div class="text-center my-3">
                     <p>Didukung oleh:</p>
-                    <img class="mx-1" src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-height: 50px;">
-                    <img class="mx-1" src="/img/logo_dishub.png" alt="Logo Asbekindo" style="max-height: 50px;">
                     <img class="mx-1" src="/img/logo_dlh.png" alt="Logo Asbekindo" style="max-height: 50px;">
+                    <img class="mx-1" src="/img/logo_dishub.png" alt="Logo Asbekindo" style="max-height: 50px;">
+                    <img class="mx-1" src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-height: 50px;">
                 </div>
             </form>
         </div>
