@@ -42,8 +42,7 @@
                                 <div class="row">
                                     {{-- <input type="text" class="px-2 form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}">    --}}
                                     <input type="text" class="px-2 @error('no_sertifikat') is-invalid @enderror form-control custom-placeholder2" name="no_sertifikat" required placeholder="Contoh: AA123456" 
-                                        value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}" 
-                                        {{ $ujiemisi->no_sertifikat ? 'readonly' : '' }}>
+                                        value="{{ old('no_sertifikat', $ujiemisi->no_sertifikat) }}">
                                         @error('no_sertifikat')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
