@@ -15,12 +15,12 @@
     <a href="/dashboard/user/create" class="btn add-button mb-3">Tambah Pengguna</a>
 
     <div class="col-lg-11">
-        <table class="table table-striped">
+        <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th class="text-center" scope="col">No</th>
                     <th scope="col">Username</th>
-                    <th scope="col">Nama Bengkel</th>
+                    <th scope="col">Nama Instansi/Bengkel</th>
                     <th scope="col">Alamat</th>
                     <th scope="col">Tanggal Dibuat</th>
                     <th scope="col">Aksi</th>
@@ -32,7 +32,7 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $u["username"] }}</td>
                         <td>{{ $u["bengkel_name"] }}</td>
-                        <td>{{ $u["jalan"]}}, {{ $u["kab_kota"] }}</td>
+                        <td>{{ $u["jalan"]}}</td>
                         {{-- <td>{{ $u["created_at"] }}</td> --}}
                         <td>{{ \Carbon\Carbon::parse($u["created_at"])->format('d/m/Y') }}</td>
 
@@ -51,7 +51,17 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 
+    <div class=col-lg-11">
+        <div class="row">
+            <div class="col-lg-5">
+                <p class="text-secondary ms-3"><strong><small>Total: </strong><span>{{ $totalRecords }}</span></small></p>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end">
+                {{ $users->links() }}
+            </div>
+        </div>
     </div>
     
 @endsection

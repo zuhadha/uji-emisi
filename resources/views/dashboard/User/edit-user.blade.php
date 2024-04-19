@@ -35,7 +35,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="kepala_bengkel" class="form-label">Nama Kepala Bengkel<span
+                        <label for="kepala_bengkel" class="form-label">Nama Kepala Instansi/Bengkel<span
                                 class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('kepala_bengkel') is-invalid @enderror"
                             id="kepala_bengkel" name="kepala_bengkel" required

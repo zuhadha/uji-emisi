@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Kendaraan;
 use App\Models\Bengkel;
 use App\Models\UjiEmisi;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,18 +18,45 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
+        // seeder real user
+
+        $bengkelNames = ['Astra Biz Daihatsu','Astra Daihatsu Asia Afrika','Astra Daihatsu Cibeureum','Astra Isuzu','Auto 2000 Asia Afrika','Auto 2000 Cibiru','Auto 2000 Pasteur','Auto 2000 Setiabudi','Auto 2000 Soekarno Hatta','Auto 2000 Suci','Mercedes Benz Bandung','Honda Ahmad Yani','Honda Autobest','Honda Bandung Center','Honda IBRM Cimahi','Honda Pasteur','Honda Sonic','Hyundai Cihampelas','Hyundai Soekarno Hatta','KIA Siloam Motor','Konjaya','Levin Motor Sport','MG Motor Bandung','Mobil Care Auto service','Nissan Indosentosa Trada','Nissan Veteran','Nusantara Jaya Sentosa','Nusantara Jaya Sentosa','Nusantara Jaya Sentosa','Nusantara Jaya Sentosa','Panca Gemilang','Personal Motor','Plaza Toyota','Sampurna Motor','Speedy Tune Up Shop','Srikandi Diamond Motor','SS Performance Shop','Star Subur','Subur Ban','Sunda Fortuna','Super Shop & drive','Surya Putra Sarana AS','Surya Putra Sarana Sudirman','Tunas BMW','Tunas Daihatsu   Soekarno Hatta','Tunas Daihatsu A Yani','Tunas Toyota Gatsu','Tunas Toyota Cimindi','Tunas Toyota Kiara Condong','Universal Auto service','Wicaksana Berlian Motor','Wijaya Dago','Wijaya Motor','Wuling Kumala Bandung','Wuling Soekarno Hatta','Mazda Asia Afrika','DFSK Bandung','Plaza Subaru Bandung','Plaza Mini Bandung','Cherry Setiabudhi Bandung','VW Audi Bandung','Nusantara Jaya Sentosa'];
+
+        $bengkelUsernames = ['astrabizdaihatsu','astradaihatsuasiaafrika','astradaihatsucibeureum','astraisuzu','auto2000asiaafrika','auto2000cibiru','auto2000pasteur','auto2000setiabudi','auto2000soekarnohatta','auto2000suci','mercedesbenzbandung','hondaahmadyani','hondaautobest','hondabandungcenter','hondaibrmcimahi','hondapasteur','hondasonic','hyundaicihampelas','hyundaisoekarnohatta','kiasiloammotor','konjaya','levinmotorsport','mgmotorbandung','mobilcareautoservice','nissanindosentosatrada','nissanveteran','nusantarajayasentosa','nusantarajayasentosa','nusantarajayasentosa','nusantarajayasentosa','pancagemilang','personalmotor','plazatoyota','sampurnamotor','speedytuneupshop','srikandidiamondmotor','ssperformanceshop','starsubur','suburban','sundafortuna','supershop&drive','suryaputrasaranaas','suryaputrasaranasudirman','tunasbmw','tunasdaihatsusoekarnohatta','tunasdaihatsuayani','tunastoyotagatsu','tunastoyotacimindi','tunastoyotakiaracondong','universalautoservice','wicaksanaberlianmotor','wijayadago','wijayamotor','wulingkumalabandung','wulingsoekarnohatta','mazdaasiaafrika','dfskbandung','plazasubarubandung','plazaminibandung','cherrysetiabudhibandung','vwaudibandung','nusantarajayasentosa'];
         
-        // Bengkel::create([
-            //     'name' => 'Bengkel 2 AAA',
-            //     'alamat' => 'Panyileukan',
-            // ]);
-            
-            // Bengkel::create([
-                //     'name' => 'Bengkel 1 BBB',
-                //     'alamat' => 'Cipadung',
-                // ]);
+        $bengkelPasswords = ['soekarnohatta438','asiaafrika127','rayacibeureum42','soekarnohatta438','asiaafrika125','soekarnohatta759','drdjunjunan192','setiabudi68','soekarnohatta145','phhmustafano6','soekarnohatta727','ahmadyani352','soekarnohatta517','cicendono18','rayacimindi88','drjunjunan168b','soekarnohatta368','cihampelas6','soekarnohatta625','soekarnohatta471','trs.jalanjakarta32','khatulistiwa6b','buahbatu302','jend.gatotsubroto176','soekarnohatta382','veteran51-55','ayani259','soekarnohatta513','soekarnohatta289','soekarnohatta700','peta261','batunggalindahix11','pelajarpejuang45','martadinata122','burangrang33','soekarnohatta342','wr.supratman40','soekarnohatta319','peta71','vandeventer3','ayani281','abdurahmansaleh4','jendralsudirman5','soekarnohatta725a','soekarnohatta725b','jendahmadyani229','gatotsubroto109','rayacilember276','terusankiaracondong47','cihampelas203','ayani225','juanda131','ayani336','bkr27','soekarnohatta729a','asiaafrika154','bkr111','pelajarpejuang45','pelajarpejuang45','setiabudhi65','soekarnohatta291','soekarnohatta291'];
+        
+        $bengkelCabang = ['-','Asia Afrika','Cibeureum','-','Asia Afrika','Cibiru','Pasteur','Setiabudi','Soekarno Hatta','Suci','Bandung','Ahmad Yani','-','-','Cimahi','Pasteur','-','Cihampelas','Sorkarno Hatta','-','-','-','-','-','-','Veteran','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','Abdurrahman Saleh','Sudirman','-','Soekarno Hatta','A Yani','Gatot Subroto','Cimindi','Kiara Condong','-','-','Dago','-','-','Soekarno Hatta','Asia Afrika','-','-','-','-','-','-'];
+
+        $bengkelAlamat = ['Jl. Soekarno Hatta 438 D Kav 1','Jl. Asia Afrika No 127','Jl. Raya Cibeureum No 42','Jl. Soekarno Hatta 438 D Kav 1','Jl. Asia Afrika No 125','Jl. Soekarno Hatta 759','Jl. Dr Djunjunan 192','Jl. Setiabudi 68','Jl. Soekarno Hatta 145','Jl. PHH Mustafa No 6','Jl. Soekarno Hatta 727','Jl. Ahmad Yani 352','Jl. Soekarno Hatta 517','Jl. Cicendo No 18','Jl. Raya Cimindi No.88','Jl. Dr Junjunan 168 B','Jl. Soekarno Hatta No.368','Jl. Cihampelas No 6','Jl. Soekarno Hatta 625','Jl. Soekarno Hatta No.471','Jl. Trs. Jalan Jakarta 32','Jl. Khatulistiwa No. 6 B','Jl. Buah Batu No.302','Jl. Jend. Gatot Subroto 176-178','Jl. Soekarno Hatta 382','Jl Veteran 51 - 55','Jl. Jend A. Yani 259','Jl. Soekarno Hatta 513','Jl. Soekarno Hatta 289','Jl. Soekarno Hatta 700','Jl. Peta 261','Jl. Batunggal Indah IX No.11','Jl. Pelajar Pejuang 45 No 103','Jl. RE Martadinata 122','Jl. Burangrang No 33','Jl. Soekarno Hatta No 342','Jl. WR.Supratman No 40','Jl. Soekarno Hatta 319','Jl. Peta - Lingkar selatan No 71','Jl. Vandeventer No 3','Jl. A Yani 281','Jl. Abdurahman Saleh No 4','Jl. Jendral Sudirman No 5','Jl. Soekarno Hatta No. 725 A','Jl. Soekarno Hatta No 725 B','Jl. Jend Ahmad Yani 229','Jl. Gatot Subroto 109 - 111','Jl. Raya Cilember 276','Jl. Terusan Kiara Condong 47','Jl. Cihampelas 203','Jl Jend A Yani 225 -227','Jl. Ir. H. Juanda No 131','Jl. Jend. Ahmad Yani No 336','Jl. BKR No.27','Jl. Soekarno Hatta No. 729A','Jl. Asia Afrika No.154','Jl. BKR No. 111','Jl. Pelajar Pejuang 45 No 47','Jl. Pelajar Pejuang 45 No 47','Jl. Dr. Setiabudhi No.65','Jl. Soekarno Hatta No. 291','Jl. Soekarno Hatta No. 291'];
+
+        $bengkelCount = count($bengkelNames);
+        $usernameCount = count($bengkelUsernames);
+        $passwordCount = count($bengkelPasswords);
+        $cabangCount = count($bengkelCabang);
+        $alamatCount = count($bengkelAlamat);
+
+        $totalCount = max($bengkelCount, $usernameCount, $passwordCount, $alamatCount);
+
+
+        for ($index = 0; $index < $totalCount; $index++) {
+            User::create([
+                'username' => $bengkelUsernames[$index % $usernameCount],
+                'password' => Hash::make($bengkelPasswords[$index % $passwordCount]), // You may change this if needed
+                'bengkel_name' => $bengkelNames[$index % $bengkelCount],
+                'perusahaan_name' => $bengkelCabang[$index % $cabangCount], // ini diisi cabang buat display di kiri
+                'kepala_bengkel' => '-',
+                'jalan' => $bengkelAlamat[$index % $alamatCount], // alamat masuk sini semua aja
+                'kab_kota' => '-',
+                'kecamatan' => '-',
+                'kelurahan' => '-',
+                'alat_uji' => '-',
+                'tanggal_kalibrasi_alat' => now(),
+                'remember_token' => Str::random(10),
+            ]);
+        }
 
 
         User::create([
@@ -44,32 +73,42 @@ class DatabaseSeeder extends Seeder
             'tanggal_kalibrasi_alat' => today(),
             'is_admin' => true,
         ]);
+        
+        User::create([
+            'username' => 'dinasdlh',
+            'password' => bcrypt('dlhbandung'),
+            'bengkel_name' => 'Dinas Lingkungan Hidup',
+            'perusahaan_name' => 'Dinas',
+            'kepala_bengkel' => '-',
+            'jalan' => 'Jl. Sadang Tengah No.4-6',
+            'kab_kota' => '-',
+            'kecamatan' => '-',
+            'kelurahan' => '-',
+            'alat_uji' => '-',
+            'user_kategori' => 'dinas',
+            'tanggal_kalibrasi_alat' => today(),
+            'is_admin' => true,
+        ]);
 
-        Kendaraan::factory(40)->create(); //
+        User::create([
+            'username' => 'dinasdishub',
+            'password' => bcrypt('dishubbandung'),
+            'bengkel_name' => 'Dinas Perhubungan Kota Bandung',
+            'perusahaan_name' => 'Dinas',
+            'kepala_bengkel' => '-',
+            'jalan' => 'Rancabolang',
+            'kab_kota' => '-',
+            'kecamatan' => '-',
+            'kelurahan' => '-',
+            'alat_uji' => '-',
+            'user_kategori' => 'dinas',
+            'tanggal_kalibrasi_alat' => today(),
+            'is_admin' => true,
+        ]);
 
-        UjiEmisi::factory(40)->create();
-        // Kendaraan::create([
-        //     'nopol' =>'C 1234 ZZZ',
-        //     'merk' => 'Honda',
-        //     'tipe' => 'Vario',
-        //     'cc' => 150,
-        //     'tahun' => 2020,
-        // ]);
+        // Kendaraan::factory(40)->create(); //
 
-        // Kendaraan::create([
-        //     'nopol' =>'F 5555 HUA',
-        //     'merk' => 'Honda',
-        //     'tipe' => 'Beat',
-        //     'cc' => 110,
-        //     'tahun' => 2012,
-        // ]);
+        // UjiEmisi::factory(40)->create();
 
-        // Kendaraan::create([
-        //     'nopol' =>'Z 2222 ZUH',
-        //     'merk' => 'Yamaha',
-        //     'tipe' => 'NMAX',
-        //     'cc' => 160,
-        //     'tahun' => 2020,
-        // ]);
     }
 }

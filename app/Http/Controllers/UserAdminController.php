@@ -10,13 +10,23 @@ class UserAdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $users = User::all();
+    public function index(Request $request) {
+        $keyword = $request->keyword;
+
+        // $users = User::all()
+        //     ->select('users.*')
+        //     ->paginate(10);
+        // $users->appends($request->all());
+
+        $users = User::paginate(10)->appends($request->all());
+
+        
+        $totalRecords = $users->total();
 
         return view('dashboard.User.index', [
             "title" => "Manajemen Pengguna",
             "users" => $users,
+            "totalRecords" => $totalRecords,
             "bengkel_name" => auth()->user()->bengkel_name,
         ]);
     }
