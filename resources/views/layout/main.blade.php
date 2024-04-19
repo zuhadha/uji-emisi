@@ -34,8 +34,13 @@
                         {{-- <div class="btn pe-4"><i class="fa-regular fa-building bengkel-icon py-0"></i></div> --}}
                         <div class="row-lg-12">
                             <div class="mt-2 row-lg-12">
-                                <p class="m-0 mb-2 h2">{{ $bengkel_name }} | <span
-                                        class="m-0 mb-1 pb-1 h4">{{ $perusahaan_name }}</span></p>
+                                <p class="m-0 mb-2 h2 charcoal-color">
+                                    <strong>{{ $bengkel_name }} </strong>
+                                    @if ($perusahaan_name && $perusahaan_name !== '-')
+                                        <span class="m-0 mb-1 pb-1 h4">{{ $perusahaan_name }}</span>
+                                    @endif
+                                </p>
+                                
                             </div>
                             {{-- <div class="my-2">@yield('nama-perusahaan')</div> --}}
                             {{-- <div class=""><p class="m-0 mb-1 h4">Toyota Astra</p></div> --}}

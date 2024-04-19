@@ -220,3 +220,8 @@ a.page-link:hover{
 .page-link {
     color: #457BC3;
 }
+
+/* bengkel display on top */
+.charcoal-color {
+    color: #333333; /* Charcoal color */
+}

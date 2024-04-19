@@ -21,8 +21,8 @@
                     <th class="text-center" scope="col">No</th>
                     <th scope="col">Username</th>
                     <th scope="col">Nama Instansi/Bengkel</th>
+                    <th scope="col">Cabang</th>
                     <th scope="col">Alamat</th>
-                    <th scope="col">Tanggal Dibuat</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -32,9 +32,9 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $u["username"] }}</td>
                         <td>{{ $u["bengkel_name"] }}</td>
+                        {{-- <td>{{ \Carbon\Carbon::parse($u["created_at"])->format('d/m/Y') }}</td> --}}
+                        <td>{{ $u["perusahaan_name"]}}</td>
                         <td>{{ $u["jalan"]}}</td>
-                        {{-- <td>{{ $u["created_at"] }}</td> --}}
-                        <td>{{ \Carbon\Carbon::parse($u["created_at"])->format('d/m/Y') }}</td>
 
                         <td>
                             <div style="display: flex;">
