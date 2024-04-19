@@ -369,7 +369,7 @@ class KendaraanUjiEmisiController extends Controller
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
 
-        $pdf->Output('D', $fileName); 
+        $pdf->Output('I', $fileName); 
 
         exit;
 }
