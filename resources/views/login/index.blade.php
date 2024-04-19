@@ -17,11 +17,11 @@
         <div class="row justify-content-center align-items-center h-100">
             <form class="login-form pb-2" action="/login" method="post">
                 @csrf
-                <div class="text-center mb-2">
-                    <img src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-width: 200px;">
+                <div class="text-center mb-4">
+                    <img src="/img/logo_ujiemisi_100x500-removebg.png" alt="Logo Asbekindo" style="max-width: 200px;">
                 </div>
 
-                <h4 class="text-center mb-2">Login</h4>
+                {{-- <h4 class="text-center mb-2">Login</h4> --}}
                 <div class="mb-3">
                     <label for="username" class="form-label mb-0">Username</label>
                     <input type="text" name="username" class="form-control" id="username" placeholder="Username"
@@ -41,8 +41,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
                 <div class="text-center my-3">
-                    <p>Supported by:</p>
-                    <img src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-width: 60px;">
+                    <p>Didukung oleh:</p>
+                    <img class="mx-1" src="/img/logo_asbekindo.png" alt="Logo Asbekindo" style="max-height: 50px;">
+                    <img class="mx-1" src="/img/logo_dishub.png" alt="Logo Asbekindo" style="max-height: 50px;">
+                    <img class="mx-1" src="/img/logo_dlh.png" alt="Logo Asbekindo" style="max-height: 50px;">
                 </div>
             </form>
         </div>
