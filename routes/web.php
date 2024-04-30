@@ -11,6 +11,8 @@ use App\Http\Controllers\UjiEmisiController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\AlatUji;
+use App\Http\Controllers\AlatUjiController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Models\Kendaraan;
@@ -88,3 +90,5 @@ Route::get('/dashboard/cetak/printer', [KendaraanUjiEmisiController::class, 'cet
 Route::get('/export', [ExportController::class, 'export'])->name('export');
 Route::get('/dashboard/export/custom', [ExportController::class, 'exportCustom'])->name('custom_export');
 Route::get('/dashboard/export/custom/input', [ExportController::class, 'exportCustomInput'])->name('custom_export_input');
+
+Route::resource('/dashboard/alatuji', AlatUjiController::class)->middleware(['auth', 'admin']);
