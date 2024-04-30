@@ -122,7 +122,7 @@ class KendaraanUjiEmisiController extends Controller
             'odometer' => 'required',
             'co' => 'numeric|between:0,9.99',
             'hc' => 'integer|between:0,9999',
-            'opasitas' => 'numeric|between:0.100',
+            'opasitas' => 'integer|between:0,100',
             'co2' => 'nullable|numeric|between:0,19.9',
             'co_koreksi' => 'nullable|numeric|between:0,9.99',
             'o2' => 'nullable|numeric|between:0,25',
