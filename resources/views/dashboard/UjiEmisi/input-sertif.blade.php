@@ -50,9 +50,9 @@
                                         @enderror
                                     <div class="col px-0 mt-2">
                                         <button type="submit" class="btn btn-success" name="print_type" value="dot_matrix">Cetak Dot Matrix<i class="fa fa-braille ms-2"></i></button>
+                                        <button type="submit" class="btn btn-warning" name="print_type" value="printer">Cetak Printer<i class="fa fa-print ms-2"></i></button>
                                     </div>
                                     <div class="col px-0 mt-2">
-                                        <button type="submit" class="btn btn-warning" name="print_type" value="printer">Cetak Printer<i class="fa fa-print ms-2"></i></button>
                                     </div>
                                 </div>
                             </form>
