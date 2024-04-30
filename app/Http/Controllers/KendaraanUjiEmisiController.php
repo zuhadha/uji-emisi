@@ -401,10 +401,10 @@ class KendaraanUjiEmisiController extends Controller
         $pdf->SetFont('courier','',9);
         $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
         $pdf->Text($column,$row+$space_per_row-0.5,strtoupper($ujiemisi->kendaraan->merk));
-        $pdf->Text($column,$row+($space_per_row*2)-0.5,strtoupper($ujiemisi->kendaraan->tipe));$pdf->Text($table,$row+($space_per_row*3)-1,$ujiemisi->co);
-        $pdf->Text($column,$row+($space_per_row*3)-0.5,strtoupper($ujiemisi->kendaraan->tahun));$pdf->Text($table,$row+($space_per_row*4)-1,$ujiemisi->hc);
+        $pdf->Text($column,$row+($space_per_row*2)-0.5,strtoupper($ujiemisi->kendaraan->tipe));$pdf->Text($table,$row+($space_per_row*3)-3,$ujiemisi->co);
+        $pdf->Text($column,$row+($space_per_row*3)-0.5,strtoupper($ujiemisi->kendaraan->tahun));$pdf->Text($table,$row+($space_per_row*4)-3,$ujiemisi->hc);
         $pdf->Text($column,$row+($space_per_row*4)+($little_space)-0.5,strtoupper($ujiemisi->kendaraan->cc));
-        $pdf->Text($column,$row+($space_per_row*5)+($little_space*2)-0.5,strtoupper($ujiemisi->kendaraan->no_rangka));$pdf->Text($table,$row+($space_per_row*6)-1,$ujiemisi->opasitas);
+        $pdf->Text($column,$row+($space_per_row*5)+($little_space*2)-0.5,strtoupper($ujiemisi->kendaraan->no_rangka));$pdf->Text($table,$row+($space_per_row*6)-3,$ujiemisi->opasitas);
         $pdf->Text($column,$row+($space_per_row*6)+($little_space*3)-0.5,strtoupper($ujiemisi->kendaraan->no_mesin));
         $pdf->Text($column,$row+($space_per_row*7)+($little_space*4)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
         $pdf->Text($column,$row+($space_per_row*8)+($little_space*5)-0.5,strtoupper($ujiemisi->odometer));
