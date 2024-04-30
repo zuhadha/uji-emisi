@@ -28,6 +28,7 @@ class UjiEmisiController extends Controller
                 ->orWhere('kendaraans.merk','LIKE', '%'.$keyword.'%')
                 ->orWhere('kendaraans.tipe','LIKE', '%'.$keyword.'%')
                 ->orWhere('kendaraans.bahan_bakar','LIKE', '%'.$keyword.'%')
+                ->orWhere('kendaraans.tanggal','LIKE', '%'.$keyword.'%')
                 ->paginate(10);
             $ujiemisis->appends($request->all());
         } else {
@@ -40,7 +41,9 @@ class UjiEmisiController extends Controller
                         ->where('kendaraans.nopol', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('kendaraans.merk','LIKE', '%'.$keyword.'%')
                         ->orWhere('kendaraans.tipe','LIKE', '%'.$keyword.'%')
-                        ->orWhere('kendaraans.bahan_bakar','LIKE', '%'.$keyword.'%');
+                        ->orWhere('kendaraans.bahan_bakar','LIKE', '%'.$keyword.'%')
+                        ->orWhere('kendaraans.tanggal','LIKE', '%'.$keyword.'%')
+                ;
                 })
                 ->paginate(10);
             $ujiemisis->appends($request->all());
