@@ -216,18 +216,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 row">
-                        <label for="co_koreksi" class="col-sm-4 col-form-label">Co Koreksi (%)</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control @error('co_koreksi') is-invalid @enderror" id="co_koreksi" name="co_koreksi" value="{{ old('co_koreksi', $ujiemisi->co_koreksi) }}">
-                            @error('co_koreksi')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
                         <label for="o2" class="col-sm-4 col-form-label" focus>O2 (%)</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('o2') is-invalid @enderror" id="o2" name="o2" value="{{ old('o2', $ujiemisi->o2) }}">
@@ -235,6 +223,18 @@
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
+                            @enderror
+
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="co_koreksi" class="col-sm-4 col-form-label">Co Koreksi (%)</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control @error('co_koreksi') is-invalid @enderror" id="co_koreksi" name="co_koreksi" value="{{ old('co_koreksi', $ujiemisi->co_koreksi) }}">
+                            @error('co_koreksi')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
 
                         </div>
