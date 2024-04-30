@@ -18,7 +18,7 @@
     </div>
 
 
-    <div class="col-lg-8">
+    <div class="col-lg-7">
         <table class="table">
             <tbody>
                 <tr>
