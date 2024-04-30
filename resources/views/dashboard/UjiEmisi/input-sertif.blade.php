@@ -61,8 +61,12 @@
                 </tr>
             </tbody>
         </table>
-        <a href="/dashboard/ujiemisi/create" class="btn btn-primary"><i class="fa fa-long-arrow-left me-2"></i><span>Tambah Uji Lagi</span></a>
-        <a href="/dashboard/ujiemisi/create" class="btn btn-secondary"><i class="fa fa-long-arrow-left me-2"></i><span>Kembali ke Halaman Uji Emisi</span></a>
+        <div class="d-block">
+            <a href="/dashboard/ujiemisi/create" class="btn btn-primary"><i class="fa fa-long-arrow-left me-2"></i><span>Tambah Uji Lagi</span></a>
+        </div>
+        <div class="d-block mt-2"> <!-- mt-2 for adding some margin between buttons -->
+            <a href="/dashboard/ujiemisi" class="btn btn-secondary"><i class="fa fa-long-arrow-left me-2"></i><span>Kembali ke Halaman Uji Emisi</span></a>
+        </div>
     </div>
 
 <script src="https://kit.fontawesome.com/467dee4ab4.js" crossorigin="anonymous"></script>
