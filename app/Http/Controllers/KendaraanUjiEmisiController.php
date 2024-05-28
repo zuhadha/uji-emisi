@@ -88,7 +88,7 @@ class KendaraanUjiEmisiController extends Controller
 
         Session::put('ujiemisi', $ujiemisi);
 
-            // Memeriksa tombol yang ditekan
+        // Memeriksa tombol yang ditekan
         $printType = $request->input('print_type');
 
         // Mengarahkan pengguna ke rute yang sesuai berdasarkan tombol yang ditekan
@@ -102,6 +102,14 @@ class KendaraanUjiEmisiController extends Controller
         // return redirect('/dashboard/cetak/dotmatrix');
         // return redirect('/dashboard/ujiemisi')->with('success', $message)->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
 
+    }
+
+    public function getNopol(Request $request)
+    {
+        $kendaraan = Kendaraan::where('nopol', $request->nopol);
+        if ($request->user()->is_admin == 0)
+            $kendaraan->where('user_id', $request->user()->id);
+        return response()->json($kendaraan->first());
     }
 
     /**
@@ -151,7 +159,7 @@ class KendaraanUjiEmisiController extends Controller
             'temperatur.between' => 'Suhu oli harus antara 10 sampai 150',
             'lambda.numeric' => 'Nilai Lambda harus berupa angka',
             'lambda.between' => 'Nilai Lambda harus antara 0.5 sampai 5',
-        ]);  
+        ]);
 
         $kendaraan = Kendaraan::where('nopol', $validatedData['nopol'])->first();
 
@@ -212,94 +220,95 @@ class KendaraanUjiEmisiController extends Controller
         //
     }
 
-    private function checkIsLulus($ujiemisi) {
+    private function checkIsLulus($ujiemisi)
+    {
         $isLulus = false;
         // ini baru untuk bensin
         if ($ujiemisi->kendaraan->bahan_bakar == "Bensin") {
             switch ($ujiemisi->kendaraan->kendaraan_kategori) {
-              case '1':
-                  if ($ujiemisi->kendaraan->tahun < 2007) {
-                      if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1000) {
-                          $isLulus = true;
-                      }
-                  } elseif ($ujiemisi->kendaraan->tahun > 2018) {
-                      if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 100) {
-                          $isLulus = true;
-                      }
-                  } else {
-                      if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 150) {
-                          $isLulus = true;
-                      }
-                  }
-                  break;
+                case '1':
+                    if ($ujiemisi->kendaraan->tahun < 2007) {
+                        if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1000) {
+                            $isLulus = true;
+                        }
+                    } elseif ($ujiemisi->kendaraan->tahun > 2018) {
+                        if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 100) {
+                            $isLulus = true;
+                        }
+                    } else {
+                        if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 150) {
+                            $isLulus = true;
+                        }
+                    }
+                    break;
 
-              case '2':
-                  if ($ujiemisi->kendaraan->tahun < 2007) {
-                      if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
-                          $isLulus = true;
-                      }
-                  } elseif ($ujiemisi->kendaraan->tahun > 2018) {
-                      if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 150) {
-                          $isLulus = true;
-                      }
-                  } else {
-                      if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 200) {
-                          $isLulus = true;
-                      }
-                  }
-                  break;
+                case '2':
+                    if ($ujiemisi->kendaraan->tahun < 2007) {
+                        if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1100) {
+                            $isLulus = true;
+                        }
+                    } elseif ($ujiemisi->kendaraan->tahun > 2018) {
+                        if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 150) {
+                            $isLulus = true;
+                        }
+                    } else {
+                        if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 200) {
+                            $isLulus = true;
+                        }
+                    }
+                    break;
 
-              case '3':
-                  if ($ujiemisi->kendaraan->tahun < 2007) {
-                      if ($ujiemisi->co <= 4 && $ujiemisi->hc <=1100) {
-                          $isLulus = true;
-                      }
-                  } elseif ($ujiemisi->kendaraan->tahun > 2018) {
-                      if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 150) {
-                          $isLulus = true;
-                      }
-                  } else {
-                      if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 200) {
-                          $isLulus = true;
-                      }
-                  }
-                  break;
+                case '3':
+                    if ($ujiemisi->kendaraan->tahun < 2007) {
+                        if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1100) {
+                            $isLulus = true;
+                        }
+                    } elseif ($ujiemisi->kendaraan->tahun > 2018) {
+                        if ($ujiemisi->co <= 0.5 && $ujiemisi->hc <= 150) {
+                            $isLulus = true;
+                        }
+                    } else {
+                        if ($ujiemisi->co <= 1 && $ujiemisi->hc <= 200) {
+                            $isLulus = true;
+                        }
+                    }
+                    break;
 
-              case '4': // 2 tak
-                  if ($ujiemisi->kendaraan->tahun < 2010) {
-                      if ($ujiemisi->co <= 4.5 && $ujiemisi->hc <=6000) {
-                          $isLulus = true;
-                      }
-                  } elseif ($ujiemisi->kendaraan->tahun > 2016) {
-                      if ($ujiemisi->co <= 3 && $ujiemisi->hc <= 1000) {
-                          $isLulus = true;
-                      }
-                  } else {
-                      if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1800) {
-                          $isLulus = true;
-                      }
-                  }
-                  break;
+                case '4': // 2 tak
+                    if ($ujiemisi->kendaraan->tahun < 2010) {
+                        if ($ujiemisi->co <= 4.5 && $ujiemisi->hc <= 6000) {
+                            $isLulus = true;
+                        }
+                    } elseif ($ujiemisi->kendaraan->tahun > 2016) {
+                        if ($ujiemisi->co <= 3 && $ujiemisi->hc <= 1000) {
+                            $isLulus = true;
+                        }
+                    } else {
+                        if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1800) {
+                            $isLulus = true;
+                        }
+                    }
+                    break;
 
-              case '5': // 4 tak
-                  if ($ujiemisi->kendaraan->tahun < 2010) {
-                      if ($ujiemisi->co <= 5.5 && $ujiemisi->hc <=2200) {
-                          $isLulus = true;
-                      }
-                  } elseif ($ujiemisi->kendaraan->tahun > 2016) {
-                      if ($ujiemisi->co <= 3 && $ujiemisi->hc <= 1000) {
-                          $isLulus = true;
-                      }
-                  } else {
-                      if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1800) {
-                          $isLulus = true;
-                      }
-                  }
-                  break;
+                case '5': // 4 tak
+                    if ($ujiemisi->kendaraan->tahun < 2010) {
+                        if ($ujiemisi->co <= 5.5 && $ujiemisi->hc <= 2200) {
+                            $isLulus = true;
+                        }
+                    } elseif ($ujiemisi->kendaraan->tahun > 2016) {
+                        if ($ujiemisi->co <= 3 && $ujiemisi->hc <= 1000) {
+                            $isLulus = true;
+                        }
+                    } else {
+                        if ($ujiemisi->co <= 4 && $ujiemisi->hc <= 1800) {
+                            $isLulus = true;
+                        }
+                    }
+                    break;
 
-              default:
-                  break;
-          }
+                default:
+                    break;
+            }
             # code...
         } elseif ($ujiemisi->kendaraan->bahan_bakar == "Solar") {
             if ($ujiemisi->kendaraan->tahun < 2010) {
@@ -319,17 +328,18 @@ class KendaraanUjiEmisiController extends Controller
         return $isLulus;
     }
 
-    public function cetakPdfDotMatrix() {
+    public function cetakPdfDotMatrix()
+    {
         $ujiemisi = Session::get('ujiemisi');
 
         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $ujiemisi->tanggal_uji)->format('d-m-Y');
         $expirationDate = Carbon::createFromFormat('d-m-Y', $formattedDate)->addYear()->format('d-m-Y');
         $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
 
-        $row=24;
-        $table=155;
-        $space_per_row=4.3;
-        $column=35;
+        $row = 24;
+        $table = 155;
+        $space_per_row = 4.3;
+        $column = 35;
 
         // setting nama kepala bengkel
         $kepala_bengkel = $ujiemisi->user->kepala_bengkel;
@@ -341,26 +351,30 @@ class KendaraanUjiEmisiController extends Controller
 
         $kepala_bengkel_baru_formatted = str_pad($kepala_bengkel, 16, ' ', STR_PAD_BOTH);
 
-        $pdf = new FPDF('L','mm',array(203.2,78)); //tambah 2 karena kepotong // original
+        $pdf = new FPDF('L', 'mm', array(203.2, 78)); //tambah 2 karena kepotong // original
         // $pdf = new FPDF('P','mm',array(203.2,203.2)); //tambah 2 karena kepotong // coba buat printer
         $pdf->AddPage();
-        $pdf->SetFont('courier','',9);
-        $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
-        $pdf->Text($column,$row+$space_per_row-0.5,strtoupper($ujiemisi->kendaraan->merk));
-        $pdf->Text($column,$row+($space_per_row*2)-0.5,strtoupper($ujiemisi->kendaraan->tipe));$pdf->Text($table,$row+($space_per_row*3)-0.5,$ujiemisi->co);
-        $pdf->Text($column,$row+($space_per_row*3)-0.5,strtoupper($ujiemisi->kendaraan->tahun));$pdf->Text($table,$row+($space_per_row*4)-0.5,$ujiemisi->hc);
-        $pdf->Text($column,$row+($space_per_row*4),strtoupper($ujiemisi->kendaraan->cc));
-        $pdf->Text($column,$row+($space_per_row*5)-0.5,strtoupper($ujiemisi->kendaraan->no_rangka));$pdf->Text($table,$row+($space_per_row*6)-0.5,$ujiemisi->opasitas);
-        $pdf->Text($column,$row+($space_per_row*6)-0.5,strtoupper($ujiemisi->kendaraan->no_mesin));
-        $pdf->Text($column,$row+($space_per_row*7)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
-        $pdf->Text($column,$row+($space_per_row*8),strtoupper($ujiemisi->odometer));
-        $pdf->Text($column,$row+($space_per_row*9),strtoupper($ujiemisi->kendaraan->user->bengkel_name));
-        $pdf->Text($column,$row+($space_per_row*10)+0.5,strtoupper($ujiemisi->user->jalan)); $pdf->Text($table-26,$row+($space_per_row*11)+0.5,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->SetFont('courier', '', 9);
+        $pdf->Text($column, $row - 0.5, strtoupper($formattedDate));
+        $pdf->Text($column, $row + $space_per_row - 0.5, strtoupper($ujiemisi->kendaraan->merk));
+        $pdf->Text($column, $row + ($space_per_row * 2) - 0.5, strtoupper($ujiemisi->kendaraan->tipe));
+        $pdf->Text($table, $row + ($space_per_row * 3) - 0.5, $ujiemisi->co);
+        $pdf->Text($column, $row + ($space_per_row * 3) - 0.5, strtoupper($ujiemisi->kendaraan->tahun));
+        $pdf->Text($table, $row + ($space_per_row * 4) - 0.5, $ujiemisi->hc);
+        $pdf->Text($column, $row + ($space_per_row * 4), strtoupper($ujiemisi->kendaraan->cc));
+        $pdf->Text($column, $row + ($space_per_row * 5) - 0.5, strtoupper($ujiemisi->kendaraan->no_rangka));
+        $pdf->Text($table, $row + ($space_per_row * 6) - 0.5, $ujiemisi->opasitas);
+        $pdf->Text($column, $row + ($space_per_row * 6) - 0.5, strtoupper($ujiemisi->kendaraan->no_mesin));
+        $pdf->Text($column, $row + ($space_per_row * 7) - 0.5, strtoupper($ujiemisi->kendaraan->bahan_bakar));
+        $pdf->Text($column, $row + ($space_per_row * 8), strtoupper($ujiemisi->odometer));
+        $pdf->Text($column, $row + ($space_per_row * 9), strtoupper($ujiemisi->kendaraan->user->bengkel_name));
+        $pdf->Text($column, $row + ($space_per_row * 10) + 0.5, strtoupper($ujiemisi->user->jalan));
+        $pdf->Text($table - 26, $row + ($space_per_row * 11) + 0.5, strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
 
         $pdf->SetFont('courier', 'B', 9);
-        $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
-        $pdf->SetFont('courier','',9);
-        $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
+        $pdf->Text($column, $row + ($space_per_row * 11) + 1, strtoupper($ujiemisi->kendaraan->nopol));
+        $pdf->SetFont('courier', '', 9);
+        $pdf->Text($column, $row + ($space_per_row * 12) + 0.5, strtoupper($expirationDate));
 
         $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Dot Matrix' . '.pdf';
 
@@ -368,23 +382,24 @@ class KendaraanUjiEmisiController extends Controller
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
 
-        $pdf->Output('I', $fileName); 
+        $pdf->Output('I', $fileName);
 
         exit;
-}
+    }
 
-    public function cetakPdfPrinter() {
+    public function cetakPdfPrinter()
+    {
         $ujiemisi = Session::get('ujiemisi');
 
         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $ujiemisi->tanggal_uji)->format('d-m-Y');
         $expirationDate = Carbon::createFromFormat('d-m-Y', $formattedDate)->addYear()->format('d-m-Y');
         $alamat = strtoupper($ujiemisi->kendaraan->user->jalan) . ' ' . $ujiemisi->kendaraan->user->kab_kota;
 
-        $row=21;
-        $table=155+18;
-        $space_per_row=4.1;
-        $little_space=0.2;
-        $column=35+26-7;
+        $row = 21;
+        $table = 155 + 18;
+        $space_per_row = 4.1;
+        $little_space = 0.2;
+        $column = 35 + 26 - 7;
 
         // setting nama kepala bengkel
         $kepala_bengkel = $ujiemisi->user->kepala_bengkel;
@@ -396,24 +411,28 @@ class KendaraanUjiEmisiController extends Controller
 
         $kepala_bengkel_baru_formatted = str_pad($kepala_bengkel, 16, ' ', STR_PAD_BOTH);
 
-        $pdf = new FPDF('P','mm',array(203.2, 297));
+        $pdf = new FPDF('P', 'mm', array(203.2, 297));
         $pdf->AddPage();
-        $pdf->SetFont('courier','',9);
-        $pdf->Text($column,$row-0.5,strtoupper($formattedDate));
-        $pdf->Text($column,$row+$space_per_row-0.5,strtoupper($ujiemisi->kendaraan->merk));
-        $pdf->Text($column,$row+($space_per_row*2)-0.5,strtoupper($ujiemisi->kendaraan->tipe));$pdf->Text($table,$row+($space_per_row*3)-2,$ujiemisi->co);
-        $pdf->Text($column,$row+($space_per_row*3)-0.5,strtoupper($ujiemisi->kendaraan->tahun));$pdf->Text($table,$row+($space_per_row*4)-2,$ujiemisi->hc);
-        $pdf->Text($column,$row+($space_per_row*4)+($little_space)-0.5,strtoupper($ujiemisi->kendaraan->cc));
-        $pdf->Text($column,$row+($space_per_row*5)+($little_space*2)-0.5,strtoupper($ujiemisi->kendaraan->no_rangka));$pdf->Text($table,$row+($space_per_row*6)-2,$ujiemisi->opasitas);
-        $pdf->Text($column,$row+($space_per_row*6)+($little_space*3)-0.5,strtoupper($ujiemisi->kendaraan->no_mesin));
-        $pdf->Text($column,$row+($space_per_row*7)+($little_space*4)-0.5,strtoupper($ujiemisi->kendaraan->bahan_bakar));
-        $pdf->Text($column,$row+($space_per_row*8)+($little_space*5)-0.5,strtoupper($ujiemisi->odometer));
-        $pdf->Text($column,$row+($space_per_row*9)+($little_space*5)-0.5,strtoupper($ujiemisi->kendaraan->user->bengkel_name));
-        $pdf->Text($column,$row+($space_per_row*10)+($little_space*4),strtoupper($ujiemisi->user->jalan)); $pdf->Text($table-26,$row+($space_per_row*11)+1,strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
-        $pdf->SetFont('courier','B',9);
-        $pdf->Text($column,$row+($space_per_row*11)+1,strtoupper($ujiemisi->kendaraan->nopol));
-        $pdf->SetFont('courier','',9);
-        $pdf->Text($column,$row+($space_per_row*12)+0.5,strtoupper($expirationDate));
+        $pdf->SetFont('courier', '', 9);
+        $pdf->Text($column, $row - 0.5, strtoupper($formattedDate));
+        $pdf->Text($column, $row + $space_per_row - 0.5, strtoupper($ujiemisi->kendaraan->merk));
+        $pdf->Text($column, $row + ($space_per_row * 2) - 0.5, strtoupper($ujiemisi->kendaraan->tipe));
+        $pdf->Text($table, $row + ($space_per_row * 3) - 2, $ujiemisi->co);
+        $pdf->Text($column, $row + ($space_per_row * 3) - 0.5, strtoupper($ujiemisi->kendaraan->tahun));
+        $pdf->Text($table, $row + ($space_per_row * 4) - 2, $ujiemisi->hc);
+        $pdf->Text($column, $row + ($space_per_row * 4) + ($little_space) - 0.5, strtoupper($ujiemisi->kendaraan->cc));
+        $pdf->Text($column, $row + ($space_per_row * 5) + ($little_space * 2) - 0.5, strtoupper($ujiemisi->kendaraan->no_rangka));
+        $pdf->Text($table, $row + ($space_per_row * 6) - 2, $ujiemisi->opasitas);
+        $pdf->Text($column, $row + ($space_per_row * 6) + ($little_space * 3) - 0.5, strtoupper($ujiemisi->kendaraan->no_mesin));
+        $pdf->Text($column, $row + ($space_per_row * 7) + ($little_space * 4) - 0.5, strtoupper($ujiemisi->kendaraan->bahan_bakar));
+        $pdf->Text($column, $row + ($space_per_row * 8) + ($little_space * 5) - 0.5, strtoupper($ujiemisi->odometer));
+        $pdf->Text($column, $row + ($space_per_row * 9) + ($little_space * 5) - 0.5, strtoupper($ujiemisi->kendaraan->user->bengkel_name));
+        $pdf->Text($column, $row + ($space_per_row * 10) + ($little_space * 4), strtoupper($ujiemisi->user->jalan));
+        $pdf->Text($table - 26, $row + ($space_per_row * 11) + 1, strtoupper($kepala_bengkel_baru_formatted)); //setting maks 16 huruf
+        $pdf->SetFont('courier', 'B', 9);
+        $pdf->Text($column, $row + ($space_per_row * 11) + 1, strtoupper($ujiemisi->kendaraan->nopol));
+        $pdf->SetFont('courier', '', 9);
+        $pdf->Text($column, $row + ($space_per_row * 12) + 0.5, strtoupper($expirationDate));
 
         $fileName = $formattedDate . '_' . $ujiemisi->kendaraan->nopol . '_Printer' . '.pdf';
 
@@ -421,7 +440,7 @@ class KendaraanUjiEmisiController extends Controller
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
 
-        $pdf->Output('I', $fileName);  
+        $pdf->Output('I', $fileName);
 
         exit;
     }

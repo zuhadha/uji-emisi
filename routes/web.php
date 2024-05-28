@@ -32,7 +32,8 @@ use App\Models\Kendaraan;
 // Route::get('/', function () {
 //     return view('/dashboard');
 // })->middleware('auth');
-Route::get('/', [DashboardController::class,'index'])->middleware('auth');
+Route::get('/dashboard/ujiemisi/get-nopol', [KendaraanUjiEmisiController::class, 'getNopol']);
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::resource('/dashboard/ujiemisi', DashboardUjiEmisiController::class)->middleware('auth');
 
@@ -69,7 +70,7 @@ Route::resource('/dashboard/kendaraan', DashboardKendaraanController::class)->mi
 
 Route::resource('/dashboard/user', UserAdminController::class)->middleware(['auth', 'admin']);
 
-Route::resource('/dashboard/ujiemisi', UjiEmisiController::class)->middleware('auth');
+Route::resource('/dashboard/ujiemisi', UjiEmisiController::class)->middleware('auth')->except(['show']);
 
 Route::resource('/dashboard/ujiemisi/insert', KendaraanUjiEmisiController::class)->middleware('auth');
 
